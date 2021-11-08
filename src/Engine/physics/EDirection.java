@@ -1,11 +1,10 @@
 package Engine.physics;
 
-public enum MoveDirection {
+public enum EDirection {
     UP,
     LEFT,
     RIGHT,
     DOWN;
-    private int k;
 
 
 

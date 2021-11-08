@@ -1,6 +1,7 @@
 package Engine.Graphics;
 
 
+import Engine.physics.Entity;
 import Pacman.Gum;
 import Pacman.Pacman;
 import Pacman.Wall;
@@ -18,6 +19,7 @@ public class Map extends JPanel {
     private ArrayList<Wall> walls = new ArrayList<>();
     private ArrayList<Gum> gums = new ArrayList<>();
     public ArrayList<Pacman> pacmen = new ArrayList<>();
+
 
     public Map(String filename) throws IOException {
         BufferedReader reader;
@@ -73,8 +75,6 @@ public class Map extends JPanel {
     protected void paintComponent(Graphics g){
         super.setBackground(new Color(59, 165, 92));
         super.paintComponents(g);
-        System.out.println(gums.size());
-        System.out.println(walls.size());
         for (Gum gum :gums){
             BufferedImage myPicture = null;
             try {
@@ -107,5 +107,6 @@ public class Map extends JPanel {
             Image image = new ImageIcon(myPicture).getImage();
             g.drawImage(image,pacman.getPixelPosition().x, pacman.getPixelPosition().y,this);
         }
+
     }
 }

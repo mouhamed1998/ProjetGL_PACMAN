@@ -8,6 +8,9 @@ public class Entity {
     private Image image;
     private String path;
     private static int size = 30;
+    private double speed = 5;
+
+
 
 
     public Point getCurrentPosition(){
@@ -57,5 +60,13 @@ public class Entity {
         int x= this.getPixelPosition().x;
         int y = this.getPixelPosition().y;
         return new Rectangle(x,y,getSize(),getSize());
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 }
