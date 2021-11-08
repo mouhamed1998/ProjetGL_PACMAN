@@ -1,4 +1,4 @@
-package Pacman;
+package Engine.physics;
 
 import java.awt.*;
 

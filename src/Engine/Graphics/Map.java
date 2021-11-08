@@ -64,7 +64,7 @@ public class Map extends JPanel {
     }
     public void setComponent(JPanel jPanel) throws IOException {
         for (Gum gum :gums){
-            BufferedImage myPicture = ImageIO.read(new File("/Users/ousmanecisse/Desktop/COURS_MASTER1/GL/Projet2/ressource/pacman_img/wall.jpeg"));
+            BufferedImage myPicture = ImageIO.read(new File("src/API/map"));
             ImageIcon image = new ImageIcon(myPicture);
             jPanel.add(new JLabel(image));
         }
@@ -78,7 +78,7 @@ public class Map extends JPanel {
         for (Gum gum :gums){
             BufferedImage myPicture = null;
             try {
-                myPicture = ImageIO.read(new File("/Users/ousmanecisse/Desktop/COURS_MASTER1/GL/Projet2/src/src/API/ressource/pacman_img/big_gum.png"));
+                myPicture = ImageIO.read(new File("src/API/ressource/pacman_img/big_gum.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -90,7 +90,7 @@ public class Map extends JPanel {
         for (Wall wall :walls){
             BufferedImage myPicture = null;
             try {
-                myPicture = ImageIO.read(new File("/Users/ousmanecisse/Desktop/COURS_MASTER1/GL/Projet2/src/src/API/ressource/pacman_img/wall.jpeg"));
+                myPicture = ImageIO.read(new File("src/API/ressource/pacman_img/wall.jpeg"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -100,7 +100,7 @@ public class Map extends JPanel {
         for (Pacman pacman :pacmen){
             BufferedImage myPicture = null;
             try {
-                myPicture = ImageIO.read(new File("/Users/ousmanecisse/Desktop/COURS_MASTER1/GL/Projet2/src/src/API/ressource/pacman_img/pac_right.png"));
+                myPicture = ImageIO.read(new File("src/API/ressource/pacman_img/pac_right.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

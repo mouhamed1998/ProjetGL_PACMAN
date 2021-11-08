@@ -1,8 +1,10 @@
 package Pacman;
 
+import Engine.physics.Entity;
+
 import java.awt.*;
 
-public class Wall extends Entity{
+public class Wall extends Entity {
 
     public Wall(Point position){
         this.setPosition(position);

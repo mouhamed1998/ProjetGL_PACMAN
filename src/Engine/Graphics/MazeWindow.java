@@ -20,7 +20,7 @@ public class MazeWindow extends JFrame {
         getContentPane().setBackground(Color.BLACK);
         JLabel scoreboard = new JLabel(" Score : 0");
         scoreboard.setForeground(new Color(59, 165, 92));
-        getContentPane().add(new Map("/Users/ousmanecisse/Desktop/COURS_MASTER1/GL/Projet2/src/src/API/map"), BorderLayout.CENTER);
+        getContentPane().add(new Map("src/API/map"), BorderLayout.CENTER);
         getContentPane().add(scoreboard, BorderLayout.SOUTH);
         /*
         Image img = new ImageIcon("/Users/ousmanecisse/Desktop/COURS_MASTER1/GL/Projet2/pacman_img/pacman_left.jpg").getImage();
