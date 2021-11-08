@@ -6,6 +6,8 @@ public enum MoveDirection {
     RIGHT,
     DOWN;
 
+    private int k;
+
 
 
 
