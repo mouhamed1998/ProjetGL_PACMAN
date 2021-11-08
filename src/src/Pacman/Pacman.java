@@ -1,8 +1,8 @@
-package Entity;
+package Pacman;
 
 import java.awt.*;
 
-public class Pacman  extends Entity{
+public class Pacman  extends Entity {
 
     private Image  normalImage, upImage, downImage, leftImage,rightImage;
 

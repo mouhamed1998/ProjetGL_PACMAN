@@ -1,4 +1,4 @@
-package Entity;
+package Pacman;
 
 import java.awt.*;
 

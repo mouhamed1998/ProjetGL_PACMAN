@@ -1,5 +1,7 @@
-package Entity;
+package Pacman;
 
-public class Ghost {
+import Pacman.*;
+
+public class Ghost extends Entity {
 
 }

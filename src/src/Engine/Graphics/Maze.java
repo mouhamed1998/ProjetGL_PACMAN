@@ -1,4 +1,4 @@
-package moteurGRaphique;
+package Engine.Graphics;
 
 import java.awt.*;
 

@@ -5,7 +5,6 @@ public enum MoveDirection {
     LEFT,
     RIGHT,
     DOWN;
-
     private int k;
 
 

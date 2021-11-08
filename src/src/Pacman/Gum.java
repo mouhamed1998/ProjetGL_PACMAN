@@ -1,8 +1,10 @@
-package Entity;
+package Pacman;
+
+import Pacman.Entity;
 
 import java.awt.*;
 
-public class Gum extends Entity{
+public class Gum extends Entity {
 
     public Gum(Point position) {
         this.setPosition(position);

@@ -1,6 +1,7 @@
-package moteur.physique;
+package Engine.physics;
 
-import Entity.Entity;
+
+import Pacman.Entity;
 
 public class Movement {
     private Entity entity;
