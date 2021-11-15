@@ -1,49 +1,105 @@
 package Engine.physics;
 
+import Pacman.Pacman;
+
 import java.awt.*;
 
 public class MovableEntity extends Entity implements Movement{
-    public MovementType direction = MovementType.STOP;
-    int speed=10;
-
+    public MovementType direction = null;
+    int speed=2;
     public int getSpeed() {
         return speed;
     }
-
     public MovementType getDirection(){
         return direction;
     }
-    public void SetDirection(MovementType direction){
+    public void setDirection(MovementType direction){
         this.direction =direction;
     }
     @Override
     public String getUrls() {
         return null;
     }
-    public void move() {
-        switch (this.getDirection()){
-            case UP :{
-                this.getPixelPosition().y -= getSpeed();
-                setPixelPosition(new Point(getPixelPosition().x, getPixelPosition().y));
-                //this.setImage(upImage);;
+    public  void moveUp(){
+        System.out.println("UP");
+        this.goUp();
+        int y = this.getPixelPosition().y - this.getSpeed();
+
+        //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
+        this.setPixelPosition(new Point(this.getPixelPosition().x, y));
+
+    }
+    public  void moveDown(){
+        System.out.println("DOWN");
+        this.goDown();
+
+        int y = this.getPixelPosition().y + this.getSpeed();
+
+
+        //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
+        this.setPixelPosition(new Point(this.getPixelPosition().x, y));
+
+
+    }
+    public void moveLeft(){
+        System.out.println("LEFT");
+        this.goLeft();
+        int x = this.getPixelPosition().x - this.getSpeed();
+        //pacman.setPosition(new Point(x, pacman.getPixelPosition().y));
+        this.setPixelPosition(new Point(x, this.getPixelPosition().y));
+
+    }
+    public void moveRight(){
+        System.out.println("RIGHT");
+        this.goRight();
+        int x = this.getPixelPosition().x + this.getSpeed();
+        //pacman.setPosition(new Point(x, pacman.getPixelPosition().y));
+        this.setPixelPosition(new Point(x, this.getPixelPosition().y));
+
+    }
+  public void move() {
+       /* switch (this.getDirection()){
+            case UP: {
+                System.out.println("UP");
+                this.goUp();
+                int y = this.getPixelPosition().y - this.getSpeed();
+                //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
+                this.setPixelPosition(new Point(this.getPixelPosition().x, y));
             }
             case DOWN :{
-                this.getPixelPosition().y += getSpeed();
-                setPixelPosition(new Point(getPixelPosition().x, getPixelPosition().y));
-                //this.setImage(downImage);
+                System.out.println("DOWN");
+                this.goDown();
+
+                int y = this.getPixelPosition().y + this.getSpeed();
+
+
+                //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
+                this.setPixelPosition(new Point(this.getPixelPosition().x, y));
+
 
             }
             case LEFT :{
-                this.getPixelPosition().x -= getSpeed();
-                setPixelPosition(new Point(getPixelPosition().x, getPixelPosition().y));
-                //this.setImage(leftImage);
+                System.out.println("LEFT");
+                this.goLeft();
+                int x = this.getPixelPosition().x - this.getSpeed();
+                //pacman.setPosition(new Point(x, pacman.getPixelPosition().y));
+                this.setPixelPosition(new Point(x, this.getPixelPosition().y));
+
             }
             case RIGHT :{
-                this.getPixelPosition().x += getSpeed();
-                setPixelPosition(new Point(getPixelPosition().x, getPixelPosition().y));
-                //this.setImage(rightImage);
+                System.out.println("RIGHT");
+                this.goRight();
+                int x = this.getPixelPosition().x + this.getSpeed();
+                //pacman.setPosition(new Point(x, pacman.getPixelPosition().y));
+                this.setPixelPosition(new Point(x, this.getPixelPosition().y));
+
+                //this.pacman.move();
             }
         }
+
+        */
+
+
     }
 
     @Override
