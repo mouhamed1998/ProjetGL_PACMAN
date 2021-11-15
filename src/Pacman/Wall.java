@@ -10,4 +10,9 @@ public class Wall extends Entity {
         this.setPosition(position);
         this.setPixelPosition(new Point(position.x * getSize(),position.y*getSize()  ) );
     }
+
+    @Override
+    public String getUrls() {
+        return "src/API/ressource/pacman_img/wall.jpeg";
+    }
 }
