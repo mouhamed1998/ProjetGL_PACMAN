@@ -38,6 +38,7 @@ public class MazeWindow extends JFrame {
         setVisible(true);
         while (true){
             repaint();
+            System.out.println("");
         }
 
 
