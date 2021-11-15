@@ -1,15 +1,22 @@
-package Pacman;
+package Engine.physics;
 
 import java.awt.*;
+import java.net.URL;
 
-public class Entity {
+public abstract class Entity {
     private Point position;
     private Point PixelPosition;
     private Image image;
     private String path;
+    private String systemPath = System.getProperty("user.dir");
     private static int size = 30;
 
-
+    public void SetImage(Image image){
+        this.image =image;
+    }
+    public URL getURLPath(String path){
+        return this.getPath().getClass().getResource(path);
+    }
     public Point getCurrentPosition(){
         return new Point(0,0);
     }
@@ -58,4 +65,6 @@ public class Entity {
         int y = this.getPixelPosition().y;
         return new Rectangle(x,y,getSize(),getSize());
     }
+
+    public abstract String getUrls();
 }

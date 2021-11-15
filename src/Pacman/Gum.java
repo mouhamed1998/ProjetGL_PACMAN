@@ -1,6 +1,6 @@
 package Pacman;
 
-import Pacman.Entity;
+import Engine.physics.Entity;
 
 import java.awt.*;
 
@@ -11,4 +11,8 @@ public class Gum extends Entity {
         this.setPixelPosition(new Point(position.x*this.getSize()+getSize()/4  ,position.y*this.getSize()+getSize()/4));
     }
 
+    @Override
+    public String getUrls() {
+        return "src/API/ressource/pacman_img/big_gum.png";
+    }
 }
