@@ -106,8 +106,7 @@ public class Map extends JPanel {
             Image image = new ImageIcon(myPicture).getImage();
             int xEntiy = entity.getPixelPosition().x;
             int yEntiy = entity.getPixelPosition().y;
-
-            g.drawImage(image,xEntiy,yEntiy,null);
+            g.drawImage(image,xEntiy,yEntiy,this);
         }
     }
 }
