@@ -10,10 +10,10 @@ public class BasicMouvement  implements Movement{
     @Override
     public void move() {
         switch (direction){
-            case UP -> yPosition -= speed;
-            case DOWN -> yPosition += speed;
-            case LEFT -> xPosition -= speed;
-            case RIGHT -> xPosition += speed;
+            case UP : yPosition -= speed; break;
+            case DOWN : yPosition += speed; break;
+            case LEFT : xPosition -= speed; break;
+            case RIGHT : xPosition += speed; break;
         }
     }
 
