@@ -1,18 +1,22 @@
 package Engine.physics;
 
 import java.awt.*;
+import java.net.URL;
 
-public class Entity {
+public abstract class Entity {
     private Point position;
     private Point PixelPosition;
     private Image image;
     private String path;
+    private String systemPath = System.getProperty("user.dir");
     private static int size = 30;
-    private double speed = 5;
 
-
-
-
+    public void SetImage(Image image){
+        this.image =image;
+    }
+    public URL getURLPath(String path){
+        return this.getPath().getClass().getResource(path);
+    }
     public Point getCurrentPosition(){
         return new Point(0,0);
     }
@@ -62,11 +66,5 @@ public class Entity {
         return new Rectangle(x,y,getSize(),getSize());
     }
 
-    public double getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
+    public abstract String getUrls();
 }

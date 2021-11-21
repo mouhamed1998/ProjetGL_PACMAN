@@ -57,7 +57,7 @@ public class MovableEntity extends Entity implements Movement{
         this.setPixelPosition(new Point(x, this.getPixelPosition().y));
 
     }
-  public void move() {
+    public void move() {
        /* switch (this.getDirection()){
             case UP: {
                 System.out.println("UP");

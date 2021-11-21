@@ -2,9 +2,11 @@ package Engine.Graphics;
 
 
 import Engine.physics.Entity;
+import Engine.physics.MovableEntity;
 import Pacman.Gum;
 import Pacman.Pacman;
 import Pacman.Wall;
+import Pacman.Ghost;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,14 +16,17 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Map extends JPanel {
+    int index_pacman = 0;
+    int index = 0;
+    //private int[][] mapGraphics;;
+    public ArrayList<Entity> entities;
 
-    private int[][] mapGraphics;
-    private ArrayList<Wall> walls = new ArrayList<>();
-    private ArrayList<Gum> gums = new ArrayList<>();
-    public ArrayList<Pacman> pacmen = new ArrayList<>();
 
 
+    public Pacman  pacman ;
     public Map(String filename) throws IOException {
+        entities = new ArrayList<>();
+        //mapGraphics = new int[22][6];
         BufferedReader reader;
         //mapGraphics = new int[][]
         BufferedReader lecteurAvecBuffer = null;
@@ -42,71 +47,66 @@ public class Map extends JPanel {
 
             for (char c : line.toCharArray()){
                 System.out.println(c);
-                if(c=='M'){
-                    walls.add(new Wall(new Point(j,i)));
+                if(c=='G'){
+                    entities.add(new Ghost(new Point(j,i),1));
+                    index_pacman++;
                     j++;
                 }
+                if(c=='g'){
+                    entities.add(new Ghost(new Point(j,i),2));
+                    j++;
+                    index_pacman++;
+                }
+                if(c=='M'){
+                    entities.add(new Wall(new Point(j,i)));
+                    //mapGraphics[i][j]=0;
+                    j++;
+                    index_pacman++;
+                }
                 if (c=='o'){
-                    gums.add(new Gum(new Point(j,i)));
+                    entities.add(new Gum(new Point(j,i)));
+                    index_pacman++;
                     j++;
                 }
                 if (c=='P'){
-                    pacmen.add(new Pacman(new Point(j,i)));
+                    entities.add(new Pacman(new Point(j,i)));
+                    index = index_pacman;
                     j++;
                 }
+
+                if(c==' '){
+                    j++;
+                }
+
+
             }
+            i++;
             line = lecteurAvecBuffer.readLine();
             j=0;
-            i++;
+
 
         }
         }
 
 
     }
-    public void setComponent(JPanel jPanel) throws IOException {
-        for (Gum gum :gums){
-            BufferedImage myPicture = ImageIO.read(new File("src/API/map"));
-            ImageIcon image = new ImageIcon(myPicture);
-            jPanel.add(new JLabel(image));
-        }
+    public Entity getPacman() {
+        return entities.get(index);
     }
-
     protected void paintComponent(Graphics g){
-        super.setBackground(new Color(59, 165, 92));
+        super.setBackground(new Color(3, 11, 33));
         super.paintComponents(g);
-        for (Gum gum :gums){
+        for (Entity entity :entities){
             BufferedImage myPicture = null;
             try {
-                myPicture = ImageIO.read(new File("src/API/ressource/pacman_img/big_gum.png"));
+                myPicture = ImageIO.read(new File(entity.getUrls()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
             Image image = new ImageIcon(myPicture).getImage();
-            g.drawImage(image,gum.getPixelPosition().x, gum.getPixelPosition().y,this);
+            int xEntiy = entity.getPixelPosition().x;
+            int yEntiy = entity.getPixelPosition().y;
+            g.drawImage(image,xEntiy,yEntiy,this);
         }
-
-
-        for (Wall wall :walls){
-            BufferedImage myPicture = null;
-            try {
-                myPicture = ImageIO.read(new File("src/API/ressource/pacman_img/wall.jpeg"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Image image = new ImageIcon(myPicture).getImage();
-            g.drawImage(image,wall.getPixelPosition().x, wall.getPixelPosition().y,this);
-        }
-        for (Pacman pacman :pacmen){
-            BufferedImage myPicture = null;
-            try {
-                myPicture = ImageIO.read(new File("src/API/ressource/pacman_img/pac_right.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Image image = new ImageIcon(myPicture).getImage();
-            g.drawImage(image,pacman.getPixelPosition().x, pacman.getPixelPosition().y,this);
-        }
-
     }
 }
