@@ -33,7 +33,6 @@ public class Pacman extends MovableEntity {
 
     public void move() {
 
-
         switch (this.getDirection()) {
             case UP: {
                 int y = this.getPixelPosition().x - getSpeed();

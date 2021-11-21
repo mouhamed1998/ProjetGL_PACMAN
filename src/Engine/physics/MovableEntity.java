@@ -20,21 +20,20 @@ public class MovableEntity extends Entity implements Movement{
     public String getUrls() {
         return null;
     }
+
     public  void moveUp(){
         System.out.println("UP");
         this.goUp();
         int y = this.getPixelPosition().y - this.getSpeed();
-
-        //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
         this.setPixelPosition(new Point(this.getPixelPosition().x, y));
 
     }
+
     public  void moveDown(){
         System.out.println("DOWN");
         this.goDown();
 
         int y = this.getPixelPosition().y + this.getSpeed();
-
 
         //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
         this.setPixelPosition(new Point(this.getPixelPosition().x, y));
