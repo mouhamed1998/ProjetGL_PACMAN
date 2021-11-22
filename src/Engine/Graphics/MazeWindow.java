@@ -27,7 +27,7 @@ public class MazeWindow extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(19, 53, 170));
         JLabel scoreboard = new JLabel(" Score : 0", JLabel.LEFT);
-        JLabel lives = new JLabel(" Lives : 0", JLabel.RIGHT);
+        JLabel lives = new JLabel(" Lives : 0", JLabel.CENTER);
         JPanel panneau = new JPanel();
         Map map = new Map("src/API/map");
         this.pacman = (MovableEntity) map.getPacman();
