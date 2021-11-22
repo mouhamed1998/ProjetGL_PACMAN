@@ -1,4 +1,4 @@
-package Engine.physics;
+package Engine.physics.movement;
 
 
 public interface Movement {

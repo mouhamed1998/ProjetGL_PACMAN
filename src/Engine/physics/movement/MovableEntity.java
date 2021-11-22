@@ -1,12 +1,14 @@
-package Engine.physics;
+package Engine.physics.movement;
 
-import Pacman.Pacman;
+import Engine.Graphics.Map;
+import Engine.physics.Collision.CollisionMap;
+import Pacman.Wall;
 
 import java.awt.*;
 
 public class MovableEntity extends Entity implements Movement{
-    public MovementType direction = null;
-    int speed=2;
+    public MovementType direction = MovementType.UP;
+    int speed=30;
     public int getSpeed() {
         return speed;
     }
@@ -20,41 +22,75 @@ public class MovableEntity extends Entity implements Movement{
     public String getUrls() {
         return null;
     }
+    CollisionMap collisionMap = new CollisionMap();
     public  void moveUp(){
-        System.out.println("UP");
         this.goUp();
-        int y = this.getPixelPosition().y - this.getSpeed();
+        System.out.println("UP");
+        for (Entity wall : Map.entities){
+            if(wall instanceof Wall){
+                System.out.println("upmmmmmmm");
+                collisionMap.CollisionUPWithWall(this, wall);
+            }
 
-        //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
-        this.setPixelPosition(new Point(this.getPixelPosition().x, y));
+        }
+        if(this.direction == MovementType.UP){
+            int y = this.getPixelPosition().y - this.getSpeed();
+            //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
+            this.setPixelPosition(new Point(this.getPixelPosition().x, y));
+        }
 
     }
     public  void moveDown(){
-        System.out.println("DOWN");
         this.goDown();
+        System.out.println("DOWN");
+        for (Entity wall : Map.entities){
+            if(wall instanceof Wall){
+                collisionMap.CollisionDOWNWithWall(this, wall);
+            }
+        }
 
-        int y = this.getPixelPosition().y + this.getSpeed();
-
-
-        //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
-        this.setPixelPosition(new Point(this.getPixelPosition().x, y));
+        if(this.direction == MovementType.DOWN){
+            int y = this.getPixelPosition().y + this.getSpeed();
+            //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
+            this.setPixelPosition(new Point(this.getPixelPosition().x, y));
+        }
 
 
     }
     public void moveLeft(){
-        System.out.println("LEFT");
         this.goLeft();
-        int x = this.getPixelPosition().x - this.getSpeed();
-        //pacman.setPosition(new Point(x, pacman.getPixelPosition().y));
-        this.setPixelPosition(new Point(x, this.getPixelPosition().y));
+        System.out.println("LEFT");
+        for (Entity wall : Map.entities){
+            if(wall instanceof Wall){
+                System.out.println("instance");
+                collisionMap.CollisionLEFTWithWall(this, wall);
+            }
+        }
+
+        if(this.direction == MovementType.LEFT){
+            int x = this.getPixelPosition().x - this.getSpeed();
+            //pacman.setPosition(new Point(x, pacman.getPixelPosition().y));
+            this.setPixelPosition(new Point(x, this.getPixelPosition().y));
+        }
+
 
     }
     public void moveRight(){
-        System.out.println("RIGHT");
         this.goRight();
-        int x = this.getPixelPosition().x + this.getSpeed();
-        //pacman.setPosition(new Point(x, pacman.getPixelPosition().y));
-        this.setPixelPosition(new Point(x, this.getPixelPosition().y));
+        System.out.println("RIGHT");
+        for (Entity wall : Map.entities){
+            if(wall instanceof Wall){
+                System.out.println("instance");
+                collisionMap.CollisionRIGHTWithWall(this, wall);
+            }
+        }
+
+
+        if(this.direction == MovementType.RIGHT){
+            int x = this.getPixelPosition().x + this.getSpeed();
+            //pacman.setPosition(new Point(x, pacman.getPixelPosition().y));
+            this.setPixelPosition(new Point(x, this.getPixelPosition().y));
+        }
 
     }
     public void move() {
@@ -129,6 +165,5 @@ public class MovableEntity extends Entity implements Movement{
 
     @Override
     public void stop() {
-
     }
 }

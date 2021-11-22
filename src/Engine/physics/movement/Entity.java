@@ -1,4 +1,4 @@
-package Engine.physics;
+package Engine.physics.movement;
 
 import java.awt.*;
 import java.net.URL;
@@ -10,6 +10,7 @@ public abstract class Entity {
     private String path;
     private String systemPath = System.getProperty("user.dir");
     private static int size = 30;
+
 
     public void SetImage(Image image){
         this.image =image;

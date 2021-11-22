@@ -1,9 +1,7 @@
 package Pacman;
 
-import Engine.physics.Entity;
-import Engine.physics.MovableEntity;
-import Engine.physics.Movement;
-import Engine.physics.MovementType;
+import Engine.physics.movement.MovableEntity;
+import Engine.physics.movement.MovementType;
 
 import javax.swing.*;
 import java.awt.*;

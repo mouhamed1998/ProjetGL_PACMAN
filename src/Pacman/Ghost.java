@@ -1,6 +1,6 @@
 package Pacman;
 
-import Engine.physics.Entity;
+import Engine.physics.movement.Entity;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package Engine.physics;
+package Engine.physics.movement;
 
 public enum MovementType {
     UP,
@@ -6,5 +6,4 @@ public enum MovementType {
     RIGHT,
     DOWN,
     STOP;
-    private int k;
 }

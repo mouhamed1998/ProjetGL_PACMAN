@@ -1,8 +1,9 @@
 package Engine.Graphics;
 
 
-import Engine.physics.Entity;
-import Engine.physics.MovableEntity;
+import Engine.physics.Collision.CollisionMap;
+import Engine.physics.movement.Entity;
+import Engine.physics.movement.MovableEntity;
 import Pacman.Gum;
 import Pacman.Pacman;
 import Pacman.Wall;
@@ -19,11 +20,11 @@ public class Map extends JPanel {
     int index_pacman = 0;
     int index = 0;
     //private int[][] mapGraphics;;
-    public ArrayList<Entity> entities;
+    public  static  ArrayList<Entity> entities;
 
 
 
-    public Pacman  pacman ;
+    public MovableEntity pacman ;
     public Map(String filename) throws IOException {
         entities = new ArrayList<>();
         //mapGraphics = new int[22][6];
@@ -93,7 +94,14 @@ public class Map extends JPanel {
     public Entity getPacman() {
         return entities.get(index);
     }
+
+    public ArrayList<Entity> getEntities() {
+        return entities;
+    }
+
     protected void paintComponent(Graphics g){
+        pacman = (MovableEntity) getPacman();
+        CollisionMap collisionMap = new CollisionMap();
         super.setBackground(new Color(3, 11, 33));
         super.paintComponents(g);
         for (Entity entity :entities){
@@ -108,5 +116,12 @@ public class Map extends JPanel {
             int yEntiy = entity.getPixelPosition().y;
             g.drawImage(image,xEntiy,yEntiy,this);
         }
+        /*
+        for (Entity entity : entities){
+            collisionMap.CollisionWithWall(pacman, entity);
+        }
+
+         */
+
     }
 }
