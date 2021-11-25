@@ -14,7 +14,7 @@ public class MazeWindow extends JFrame {
         setTitle("GL-Projet-PACMAN");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        setSize(860, 750);
+        setSize(860, 780);
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(19, 53, 170));
         JLabel scoreboard = new JLabel(" Score : 0");

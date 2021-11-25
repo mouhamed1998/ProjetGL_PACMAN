@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Map extends JPanel {
     int index_pacman = 0;
@@ -27,6 +28,8 @@ public class Map extends JPanel {
     ArrayList<Gum> foods;
     ArrayList<Gum> pufoods;
     ArrayList<Ghost> ghosts;
+    Image foodImage;
+    Image[] pfoodImage;
     //private int[][] mapGraphics;;
     public  static  ArrayList<Entity> entities;
     public Pacman pacman ;
@@ -50,9 +53,38 @@ public class Map extends JPanel {
             wall.setImage(mapSegments[map[mapPoint.y][mapPoint.x]]);
             walls.add(wall);
         }
+        pfoodImage = new Image[5];
+        for(int ms=0 ;ms<5;ms++){
+            try {
+                String path =("src/API/ressource/pacman_img/Image/Coin/fruit-"+ms+".png");
+                pfoodImage[ms] = new ImageIcon(path).getImage();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        try{
+            String path = ("src/API/ressource/pacman_img/Image/Coin/coin-normal.png");
+            foodImage = new ImageIcon(path).getImage();
+            //goImage = ImageIO.read(this.getClass().getResource("resources/images/gameover.png"));
+            //vicImage = ImageIO.read(this.getClass().getResource("resources/images/victory.png"));
+            //pfoodImage = ImageIO.read(this.getClass().getResource("/images/pfood.png"));
+        }catch(Exception e){}
     }
 
     void initEntity(){
+        foods = new ArrayList<>();
+        pufoods = new ArrayList<>();
+        ghosts = new ArrayList<>();
+        for(Point foodPosition: mapNew.getCoinPositions()) {
+            foods.add(new Gum(new Point(foodPosition.x, foodPosition.y)));
+        }
+        for(Point puFood : mapNew.getPuCoinPositions()) {
+            Gum coin = new Gum(new Point(puFood.x, puFood.y));
+            int random = new Random().nextInt(5);
+            coin.setImage(pfoodImage[random]);
+            pufoods.add(coin);
+
+        }
         this.pacman = new Pacman(mapNew.getPacmanPosition(), this);
         //foods = new ArrayList<>();
         //pufoods = new ArrayList<>();
@@ -165,6 +197,22 @@ public class Map extends JPanel {
         int xPacman = pacman.getPixelPosition().x;
         int yPacman = pacman.getPixelPosition().y;
         g.drawImage(pacman.getImage(), xPacman, yPacman, null);
+        g.setColor(new Color(204, 122, 122));
+        for(Gum f : foods){
+            //g.fillOval(f.position.x*28+22,f.position.y*28+22,4,4);
+            int x = f.getPixelPosition().x;
+            int y = f.getPixelPosition().y;
+            g.drawImage(foodImage, x, y, null);
+        }
+
+        //Draw PowerUpFoods
+        g.setColor(new Color(204, 174, 168));
+        for(Gum f : pufoods){
+            //g.fillOval(f.position.x*28+20,f.position.y*28+20,8,8);
+            int x = f.getPixelPosition().x;
+            int y = f.getPixelPosition().y;
+            g.drawImage(f.getImage(), x, y,null);
+        }
 
         /*
         for (Entity entity :entities){
