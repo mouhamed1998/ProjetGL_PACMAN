@@ -1,34 +1,66 @@
 package Pacman;
 
+import Engine.physics.Collision.CollisionMap;
 import Engine.physics.movement.MovableEntity;
 import Engine.physics.movement.MovementType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Pacman extends MovableEntity {
 
-    private Image  normalImage, upImage, downImage, leftImage,rightImage;
-
-    public Pacman(Point position) {
+    private Image  normalImage, upImage, downImage, leftImage,rightImage,image;
+    public MovementType nextDirection;
+    public int speed =1;
+    private JPanel jPanel;
+    String url;
+    public Pacman(Point position, JPanel jPanel){
+        this.jPanel = jPanel;
+        nextDirection = MovementType.STOP;
+        this.direction = MovementType.RIGHT;
         this.setPosition(position);
-        this.setPixelPosition(new Point(position.x*this.getSize()+getSize()/4 ,position.y*this.getSize()+getSize()/4));
-        this.upImage = new ImageIcon("src/API/ressource/pacman_img/pac_right.png").getImage();
-        this.normalImage = new ImageIcon("src/API/ressource/pacman_img/pac_right.png").getImage();
-        this.downImage = new ImageIcon("src/API/ressource/pacman_img/pac_right.png").getImage();
-        this.leftImage = new ImageIcon("src/API/ressource/pacman_img/pac_right.png").getImage();
-        this.rightImage = new ImageIcon("src/API/ressource/pacman_img/pac_right.png").getImage();
+        this.setPixelPosition(new Point(position.x*getSize()+10 ,position.y*getSize()+10));
+        this.upImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/up/up.gif").getImage();
+        this.normalImage = new ImageIcon("src/API/ressource/pacman_img/right.gif").getImage();
+        this.image = new ImageIcon("src/API/ressource/pacman_img/right.gif").getImage();
+        this.downImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/down/down.gif").getImage();
+        this.leftImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/left/left.gif").getImage();
+        this.rightImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/right/right.gif").getImage();
         this.setImage(normalImage);
     }
     @Override
-    public
-
-    String getUrls() {
-        return "src/API/ressource/pacman_img/pac_right.png";
+    public String getUrls() {
+        switch (direction){
+            case UP:
+                url = "src/API/ressource/pacman_img/Image/Pacman/up/up.gif";
+                return "src/API/ressource/pacman_img/Image/Pacman/up/up.gif";
+            case DOWN:
+                url = "src/API/ressource/pacman_img/Image/Pacman/down/down.gif";
+                return "src/API/ressource/pacman_img/Image/Pacman/down/down.gif";
+            case RIGHT:
+                url = "src/API/ressource/pacman_img/Image/Pacman/right/right.gif";
+                return "src/API/ressource/pacman_img/Image/Pacman/right/right.gif";
+            case LEFT:
+                url = "src/API/ressource/pacman_img/Image/Pacman/left/left.gif";
+                return "src/API/ressource/pacman_img/Image/Pacman/left/left.gif";
+            default:
+                break;
+        }
+        return url;
     }
 
+    public Image getImage(){
+        return image;
+    }
+    public  void setImage(Image image){
+        this.image = image;
+    }
+    public String Url(){
+        return getUrls();
+    }
+/*
     @Override
-
     public void move() {
 
 
@@ -68,6 +100,8 @@ public class Pacman extends MovableEntity {
         }
     }
 
+ */
+
 
     @Override
     public String name() {
@@ -96,6 +130,68 @@ public class Pacman extends MovableEntity {
 
     @Override
     public void stop() {
+        direction = MovementType.STOP;
+    }
+
+    public Pacman() {
+    }
+
+    public void verifyNextDirection(ArrayList<Wall> walls) {
+        if (nextDirection == MovementType.STOP) return;
+        Pacman newPacman = new Pacman();
+        newPacman.setDirection(this.nextDirection);
+        newPacman.setPixelPosition(this.getPixelPosition());
+        CollisionMap collision = new CollisionMap();
+        for (Wall wall : walls) {
+            collision.collisionWithWall(newPacman, wall);
+        }
+        if (newPacman.getDirection() != MovementType.STOP) calculateNextDirection();
+    }
+
+    private void calculateNextDirection() {
+        this.setDirection(nextDirection);
+        nextDirection = MovementType.STOP;
+    }
+
+    @Override
+
+    public void move() {
+        //System.out.println(image.getSource());
+        switch (this.getDirection()) {
+            case UP:
+                this.setImage(upImage);
+                this.getPixelPosition().y -= speed;
+                this.jPanel.getGraphics().drawImage(this.image, getPixelPosition().x, getPixelPosition().y, null);
+                this.nextDirection = MovementType.UP;
+                this.jPanel.repaint();
+                break;
+            case DOWN:
+                this.setImage(downImage);
+                this.getPixelPosition().y += speed;
+                this.jPanel.getGraphics().drawImage(this.image, getPixelPosition().x, getPixelPosition().y, null);
+                this.nextDirection = MovementType.DOWN;
+                this.jPanel.repaint();
+                break;
+            case LEFT:
+                this.setImage(leftImage);
+                this.getPixelPosition().x -= speed;
+                this.jPanel.getGraphics().drawImage(this.image, getPixelPosition().x, getPixelPosition().y, null);
+                this.nextDirection = MovementType.LEFT;
+                this.jPanel.repaint();
+                break;
+            case RIGHT:
+                this.setImage(rightImage);
+                this.getPixelPosition().x += speed;
+                this.jPanel.getGraphics().drawImage(this.image, getPixelPosition().x, getPixelPosition().y, null);
+                this.nextDirection = MovementType.RIGHT;
+                this.jPanel.repaint();
+
+                break;
+            default:
+                break;
+        }
 
     }
+
+
 }

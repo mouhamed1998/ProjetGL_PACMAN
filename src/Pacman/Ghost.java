@@ -12,11 +12,12 @@ public class Ghost extends Entity {
     public int getNumber() {
         return number;
     }
+    private Image image;
 
     public Ghost(Point position, int number) {
         this.number = number;
         this.setPosition(position);
-        this.setPixelPosition(new Point(position.x*this.getSize()+getSize()/4  ,position.y*this.getSize()+getSize()/4));
+        this.setPixelPosition(new Point(position.x*this.getSize()+10 ,position.y*this.getSize()+10));
 
     }
 
@@ -33,6 +34,30 @@ public class Ghost extends Entity {
                 Image image = new ImageIcon(("src/API/ressource/pacman_img/pngwing.com_1.png")).getImage();
                 this.setImage(image);
                 return "src/API/ressource/pacman_img/pngwing.com_1.png";
+            }
+            /*
+            case 3:{
+                Image image = new ImageIcon(this.getURLPath("src/API/ressource/pacman_img/pngwing.com_1.png")).getImage();
+                this.setImage(image);
+                break;
+            }
+
+             */
+        }
+        return null;
+    }
+    public Image getImage() {
+        switch (number){
+            case 1:{
+                this.image = new ImageIcon(("src/API/ressource/pacman_img/pngwing.com.png")).getImage();
+                this.setImage(image);
+                return  image;
+
+            }
+            case 2:{
+                this.image = new ImageIcon(("src/API/ressource/pacman_img/pngwing.com_1.png")).getImage();
+                this.setImage(image);
+                return image;
             }
             /*
             case 3:{

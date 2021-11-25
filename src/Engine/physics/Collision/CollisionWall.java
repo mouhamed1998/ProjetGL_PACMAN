@@ -6,10 +6,11 @@ import Engine.physics.movement.Movement;
 import Pacman.Wall;
 
 public interface CollisionWall {
-    public void CollisionUPWithWall(MovableEntity entity, Entity wall);
-    public void CollisionDOWNWithWall(MovableEntity entity, Entity wall);
-    public void CollisionLEFTWithWall(MovableEntity entity, Entity wall);
-    public void CollisionRIGHTWithWall(MovableEntity entity, Entity wall);
+    //public void CollisionUPWithWall(MovableEntity entity, Entity wall);
+    //public void CollisionDOWNWithWall(MovableEntity entity, Entity wall);
+    //public void CollisionLEFTWithWall(MovableEntity entity, Entity wall);
+    //public void CollisionRIGHTWithWall(MovableEntity entity, Entity wall);
+    public void collisionWithWall(MovableEntity movableEntity, Wall wall);
 
 
 }
