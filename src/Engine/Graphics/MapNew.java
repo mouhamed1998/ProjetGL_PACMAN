@@ -76,17 +76,24 @@ public class MapNew {
     public void getMapFromResource(String relPath){
         //System.out.println("path: "+ this.getClass().getClassLoader().getResource(relPath).getPath());
         BufferedReader reader;
-        mapGraphic = new int[29][27];
+        mapGraphic = new int[24][27];
         coinPositions = new ArrayList<>();
         puCoinPositions = new ArrayList<>();
         ghostsData = new ArrayList<>();
         wallPositions = new ArrayList<>();
         try {
-            InputStream input = this.getClass().getClassLoader().getResourceAsStream(relPath);
-            InputStreamReader streamReader =
-                    new InputStreamReader(input, StandardCharsets.UTF_8);
-            reader = new BufferedReader(streamReader);
-            String line = reader.readLine();
+            BufferedReader lecteurAvecBuffer = null;
+            String ligne;
+
+            try
+            {
+                lecteurAvecBuffer = new BufferedReader(new FileReader(relPath));
+            }
+            catch(FileNotFoundException exc)
+            {
+                System.out.println("Erreur d'ouverture");
+            }
+            String line = lecteurAvecBuffer.readLine();;
             int i = 0;
             int j = 0;
             while(line != null){
@@ -142,7 +149,7 @@ public class MapNew {
                         j = 0;
                     }
                 }
-                line = reader.readLine();
+                line = lecteurAvecBuffer.readLine();
             }
         }catch(Exception e){
             e.printStackTrace();

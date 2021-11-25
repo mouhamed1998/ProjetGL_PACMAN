@@ -90,6 +90,7 @@ public class MovableEntity extends Entity implements Movement{
      */
 
     public void move() {
+
         switch (this.getDirection()) {
             case UP:
                 this.getPixelPosition().y -= speed;

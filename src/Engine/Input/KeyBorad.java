@@ -4,6 +4,7 @@ import Engine.Graphics.Map;
 import Engine.physics.Collision.CollisionMap;
 import Engine.physics.movement.Entity;
 import Engine.physics.movement.MovableEntity;
+import Pacman.Pacman;
 import Pacman.Wall;
 
 import java.awt.event.KeyAdapter;
@@ -11,8 +12,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyBorad extends KeyAdapter implements KeyListener {
-    MovableEntity pacman ;
-    public KeyBorad(MovableEntity pacman) {
+    Pacman pacman ;
+    public KeyBorad(Pacman pacman) {
         this.pacman = pacman;
 
     }
@@ -24,12 +25,12 @@ public class KeyBorad extends KeyAdapter implements KeyListener {
         if(key == KeyEvent.VK_UP){
             System.out.println("UP");
             this.pacman.goUp();
-
-            for (Entity entity : Map.entities){
-                if(entity instanceof Wall) collisionMap.collisionWithWall(pacman, (Wall) entity);
+            for (Entity entity : Map.walls){
+                if(entity instanceof Wall){
+                    collisionMap.collisionWithWall(pacman, (Wall) entity);
+                }
 
             }
-
             this.pacman.move();
             //this.pacman.goUp();
         }
@@ -38,7 +39,7 @@ public class KeyBorad extends KeyAdapter implements KeyListener {
             //
             //
            this.pacman.goDown();
-            for (Entity entity : Map.entities){
+            for (Entity entity : Map.walls){
                 if(entity instanceof Wall) collisionMap.collisionWithWall(pacman, (Wall) entity);
 
             }
@@ -51,7 +52,7 @@ public class KeyBorad extends KeyAdapter implements KeyListener {
         if(key == KeyEvent.VK_LEFT){
             System.out.println("LEFT");
             this.pacman.goLeft();
-            for (Entity entity : Map.entities){
+            for (Entity entity : Map.walls){
                 if(entity instanceof Wall) collisionMap.collisionWithWall(pacman, (Wall) entity);
 
             }
@@ -62,7 +63,7 @@ public class KeyBorad extends KeyAdapter implements KeyListener {
         if(key == KeyEvent.VK_RIGHT){
             System.out.println("RIGHT");
             this.pacman.goRight();
-            for (Entity entity : Map.entities){
+            for (Entity entity : Map.walls){
                 if(entity instanceof Wall) collisionMap.collisionWithWall(pacman, (Wall) entity);
 
             }

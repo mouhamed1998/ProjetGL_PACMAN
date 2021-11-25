@@ -20,38 +20,55 @@ import java.util.ArrayList;
 public class Map extends JPanel {
     int index_pacman = 0;
     int index = 0;
-    ArrayList<Wall> walls = new ArrayList<>();
+    public static ArrayList<Wall> walls = new ArrayList<>();
     MapNew mapNew  = new MapNew();
-    int[][] map = mapNew.getMapGraphic();
-    Image[] mapSegments;
+    int[][] map ;
+    Image[] mapSegments = new Image[28];;
+    ArrayList<Gum> foods;
+    ArrayList<Gum> pufoods;
+    ArrayList<Ghost> ghosts;
     //private int[][] mapGraphics;;
     public  static  ArrayList<Entity> entities;
-
     public Pacman pacman ;
     void initImage() {
+        mapNew.getMapFromResource("src/API/mapS.txt");
+        mapNew.adjustNewMap();
+        map =mapNew.getMapGraphic();
         setBackground(Color.black);
-        mapSegments = new Image[28];
         mapSegments[0] = null;
         for(int ms=1;ms<27;ms++){
             try {
-                URL path = this.getClass().getClassLoader().getResource("Image/map_segments/"+ms+".png");
+                String path = "src/API/ressource/pacman_img/Image/map_segments/"+ms+".png";
                 mapSegments[ms] = new ImageIcon(path).getImage();
             }catch(Exception e){
                 System.out.println("ms: " + ms);
                 e.printStackTrace();
             }
         }
-    }
-    public Map(){
-        //initImage();
-    }
-    public void getResources(String filename) throws IOException {
-        mapNew.getMapFromResource("src/API/MapSecondaire");
         for(Point mapPoint : mapNew.getWallPositions()) {
             Wall wall = new Wall(mapPoint);
             wall.setImage(mapSegments[map[mapPoint.y][mapPoint.x]]);
             walls.add(wall);
         }
+    }
+
+    void initEntity(){
+        this.pacman = new Pacman(mapNew.getPacmanPosition(), this);
+        //foods = new ArrayList<>();
+        //pufoods = new ArrayList<>();
+        ghosts = new ArrayList<>();
+        //walls = new ArrayList<>();
+
+        ghosts = new ArrayList<>();
+        ghosts.addAll(mapNew.getGhostsData());
+
+    }
+    public Map(){
+        initImage();
+        initEntity();
+    }
+    public void getResources(String filename) throws IOException {
+
         entities = new ArrayList<>();
         //mapGraphics = new int[22][6];
         BufferedReader reader;
@@ -86,7 +103,7 @@ public class Map extends JPanel {
                 }
                 if(c=='M'){
                     entities.add(new Wall(new Point(j,i)));
-                    walls.add(new Wall(new Point(j,i)));
+                    //walls.add(new Wall(new Point(j,i)));
                     //mapGraphics[i][j]=0;
                     j++;
                     index_pacman++;
@@ -118,20 +135,38 @@ public class Map extends JPanel {
 
 
     }
+    public Pacman getPacman(){
+        return pacman;
+    }
+    /*
     public Entity getPacman() {
         return entities.get(index);
     }
+
+     */
     CollisionMap collisionMap = new CollisionMap();
     public ArrayList<Entity> getEntities() {
         return entities;
     }
     JLabel imageLabel = new JLabel();
     protected void paintComponent(Graphics g){
-
-        pacman = (Pacman) getPacman();
-
+        //pacman = (Pacman) getPacman();
         super.setBackground(new Color(3, 11, 33));
         super.paintComponents(g);
+        for (Wall wall : walls) {
+            g.drawImage(wall.getImage(), wall.getPixelPosition().x, wall.getPixelPosition().y, null);
+        }
+        for(Ghost gh : ghosts) {
+            Image ghostImage = gh.getImage();
+            int xGhost = gh.getPixelPosition().x;
+            int yGhost = gh.getPixelPosition().y;
+            g.drawImage(ghostImage, xGhost, yGhost, null);
+        }
+        int xPacman = pacman.getPixelPosition().x;
+        int yPacman = pacman.getPixelPosition().y;
+        g.drawImage(pacman.getImage(), xPacman, yPacman, null);
+
+        /*
         for (Entity entity :entities){
             BufferedImage myPicture = null;
 
@@ -156,7 +191,9 @@ public class Map extends JPanel {
 
         }
 
+         */
 
+        /*
         for (Wall wall :walls){
             collisionMap.collisionWithWall(pacman,wall);
         }

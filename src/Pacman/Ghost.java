@@ -18,6 +18,28 @@ public class Ghost extends Entity {
         this.number = number;
         this.setPosition(position);
         this.setPixelPosition(new Point(position.x*this.getSize()+10 ,position.y*this.getSize()+10));
+        switch (number){
+            case 1:{
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png")).getImage();
+                this.setImage(image);
+                break;
+            }
+            case 2: {
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png")).getImage();
+                this.setImage(image);
+                break;
+            }
+            case 3: {
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Clyde/Clyde-0.png")).getImage();
+                this.setImage(image);
+                break;
+            }
+            default: {
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png")).getImage();
+                this.setImage(image);
+                break;
+            }
+        }
 
     }
 
@@ -25,48 +47,48 @@ public class Ghost extends Entity {
     public String getUrls() {
         switch (number){
             case 1:{
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/pngwing.com.png")).getImage();
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png")).getImage();
                 this.setImage(image);
-                return "src/API/ressource/pacman_img/pngwing.com.png";
+                return"src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png";
 
             }
             case 2:{
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/pngwing.com_1.png")).getImage();
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png")).getImage();
                 this.setImage(image);
-                return "src/API/ressource/pacman_img/pngwing.com_1.png";
-            }
-            /*
-            case 3:{
-                Image image = new ImageIcon(this.getURLPath("src/API/ressource/pacman_img/pngwing.com_1.png")).getImage();
-                this.setImage(image);
-                break;
+                return "src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png";
             }
 
-             */
+            case 3:{
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png")).getImage();
+                this.setImage(image);
+                return "src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png";
+
+            }
+
         }
         return null;
     }
     public Image getImage() {
         switch (number){
             case 1:{
-                this.image = new ImageIcon(("src/API/ressource/pacman_img/pngwing.com.png")).getImage();
+                this.image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png")).getImage();
                 this.setImage(image);
                 return  image;
 
             }
             case 2:{
-                this.image = new ImageIcon(("src/API/ressource/pacman_img/pngwing.com_1.png")).getImage();
+                this.image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png")).getImage();
                 this.setImage(image);
                 return image;
             }
-            /*
+
             case 3:{
-                Image image = new ImageIcon(this.getURLPath("src/API/ressource/pacman_img/pngwing.com_1.png")).getImage();
+                Image image =  new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png")).getImage();
                 this.setImage(image);
-                break;
+                return image;
             }
 
-             */
+
         }
         return null;
     }

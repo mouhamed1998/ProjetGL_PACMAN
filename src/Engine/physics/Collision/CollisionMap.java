@@ -2,6 +2,7 @@ package Engine.physics.Collision;
 
 import Engine.physics.movement.MovableEntity;
 import Engine.physics.movement.MovementType;
+import Pacman.Pacman;
 import Pacman.Wall;
 
 public class CollisionMap implements CollisionWall{
@@ -72,6 +73,8 @@ public class CollisionMap implements CollisionWall{
                 }
                 break;
             }
+            default:
+                break;
 
         }
 
