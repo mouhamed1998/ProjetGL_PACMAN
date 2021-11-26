@@ -29,6 +29,13 @@ public class Pacman extends MovableEntity {
         this.rightImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/right/right.gif").getImage();
         this.setImage(normalImage);
     }
+
+    public Pacman(Point position) {
+        this.setPosition(position);
+        this.setPixelPosition(new Point(position.x*getSize()+10 ,position.y*getSize()+10));
+    }
+
+
     @Override
     public String getUrls() {
         switch (direction){
