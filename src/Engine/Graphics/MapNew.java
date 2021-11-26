@@ -12,7 +12,6 @@ public class MapNew {
     private int[][] mapGraphic;
     private ArrayList<Point> coinPositions;
     private ArrayList<Point> puCoinPositions;
-    //private ArrayList<TeleportTunnel> teleports;
     private ArrayList<Ghost> ghostsData;
     private ArrayList<Point> wallPositions;
     private Point pacmanPosition;
@@ -368,7 +367,6 @@ public class MapNew {
         }
         this.setMapGraphic(map);
         showMapString(map);
-        System.out.println("Map Adjust OK !");
 
 
     }
