@@ -213,6 +213,8 @@ public class Map extends JPanel {
             int y = f.getPixelPosition().y;
             g.drawImage(f.getImage(), x, y,null);
         }
+
+        /*
         for (Wall wall :walls){
             collisionMap.collisionWithWall(pacman,wall);
         }
