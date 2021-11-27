@@ -4,6 +4,7 @@ import Engine.Graphics.Map;
 import Engine.physics.Collision.CollisionMap;
 import Engine.physics.movement.Entity;
 import Engine.physics.movement.MovableEntity;
+import Engine.physics.movement.MovementType;
 import Pacman.Pacman;
 import Pacman.Wall;
 
@@ -25,13 +26,16 @@ public class KeyBorad extends KeyAdapter implements KeyListener {
         if(key == KeyEvent.VK_UP){
             System.out.println("UP");
             this.pacman.goUp();
+
             for (Entity entity : Map.walls){
                 if(entity instanceof Wall){
                     collisionMap.collisionWithWall(pacman, (Wall) entity);
                 }
 
             }
+
             this.pacman.move();
+
             //this.pacman.goUp();
         }
         if(key == KeyEvent.VK_DOWN){
@@ -43,9 +47,8 @@ public class KeyBorad extends KeyAdapter implements KeyListener {
                 if(entity instanceof Wall) collisionMap.collisionWithWall(pacman, (Wall) entity);
 
             }
-
-
             this.pacman.move();
+
             //this.pacman.goDown();
 
         }
@@ -57,7 +60,6 @@ public class KeyBorad extends KeyAdapter implements KeyListener {
 
             }
             this.pacman.move();
-            //this.pacman.goLeft();
 
         }
         if(key == KeyEvent.VK_RIGHT){
@@ -68,6 +70,7 @@ public class KeyBorad extends KeyAdapter implements KeyListener {
 
             }
             this.pacman.move();
+
             //this.pacman.goRight();
         }
     }
