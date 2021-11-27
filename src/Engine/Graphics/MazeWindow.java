@@ -15,6 +15,7 @@ public class MazeWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setSize(860, 780);
+        setResizable(false);
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(19, 53, 170));
         JLabel scoreboard = new JLabel(" Score : 0");
