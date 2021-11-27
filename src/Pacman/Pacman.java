@@ -70,7 +70,6 @@ public class Pacman extends MovableEntity {
     @Override
     public void move() {
 
-
         switch (this.getDirection()) {
             case UP: {
                 int y = this.getPixelPosition().x - getSpeed();

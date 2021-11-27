@@ -12,6 +12,6 @@ public interface CollisionWall {
     //public void CollisionLEFTWithWall(MovableEntity entity, Entity wall);
     //public void CollisionRIGHTWithWall(MovableEntity entity, Entity wall);
     public void collisionWithWall(MovableEntity movableEntity, Wall wall);
-
+    boolean isCollisionWithWall(MovableEntity movableEntity, Wall wall);
 
 }
