@@ -4,8 +4,10 @@ import Engine.physics.movement.Entity;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Gum extends Entity {
+    public  boolean canEat = true;
     private Image image;
     public Gum(Point position) {
         this.image = new ImageIcon("src/API/ressource/pacman_img/big_gum.png").getImage();
@@ -17,12 +19,16 @@ public class Gum extends Entity {
     public String getUrls() {
         return "src/API/ressource/pacman_img/big_gum.png";
     }
-
     public Image getImage(){
         return image;
     }
-
     public  void setImage(Image image){
         this.image = image;
+    }
+
+    public void setEat(){
+        Image image = new BufferedImage(30,30,BufferedImage.TYPE_BYTE_GRAY);
+        image.getGraphics().setColor(new Color(19, 53, 170));
+        setImage(image);
     }
 }

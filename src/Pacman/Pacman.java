@@ -13,6 +13,10 @@ public class Pacman extends MovableEntity {
     private Image  normalImage, upImage, downImage, leftImage,rightImage,image;
     public MovementType nextDirection;
     public int speed =5;
+
+
+
+    public int life =3;
     private JPanel jPanel;
     String url;
     public Pacman(Point position, JPanel jPanel){
@@ -29,6 +33,11 @@ public class Pacman extends MovableEntity {
         this.rightImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/right/right.gif").getImage();
         this.setImage(normalImage);
     }
+
+    public int getLife() {
+        return life;
+    }
+
 
     public Pacman(Point position) {
         this.setPosition(position);
