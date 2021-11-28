@@ -2,9 +2,68 @@ package Engine.physics.movement;
 
 import Engine.physics.Collision.CollisionMap;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class MovableEntity extends Entity implements Movement{
     public MovementType direction = MovementType.STOP;
     int speed=30;
+    protected Image  normalImage, upImage, downImage, leftImage,rightImage,image;
+    public MovementType nextDirection;
+    protected JPanel jPanel;
+    protected int number;
+
+    public MovableEntity(Point position, JPanel jPanel){
+        this.jPanel = jPanel;
+        nextDirection = MovementType.STOP;
+        this.direction = MovementType.RIGHT;
+        this.setPosition(position);
+        this.setPixelPosition(new Point(position.x*getSize()+10 ,position.y*getSize()+10));
+        this.upImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/up/up.gif").getImage();
+        this.normalImage = new ImageIcon("src/API/ressource/pacman_img/right.gif").getImage();
+        this.image = new ImageIcon("src/API/ressource/pacman_img/right.gif").getImage();
+        this.downImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/down/down.gif").getImage();
+        this.leftImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/left/left.gif").getImage();
+        this.rightImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/right/right.gif").getImage();
+        this.setImage(normalImage);
+
+    }
+
+    public MovableEntity(Point position){
+        this.setPosition(position);
+        this.setPixelPosition(new Point(position.x*getSize()+10 ,position.y*getSize()+10));
+    }
+
+    public MovableEntity(){}
+
+    public MovableEntity(Point position, int number){
+        this.number = number;
+        this.setPosition(position);
+        this.setPixelPosition(new Point(position.x*this.getSize()+10 ,position.y*this.getSize()+10));
+        switch (number){
+            case 1:{
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png")).getImage();
+                this.setImage(image);
+                break;
+            }
+            case 2: {
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png")).getImage();
+                this.setImage(image);
+                break;
+            }
+            case 3: {
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Clyde/Clyde-0.png")).getImage();
+                this.setImage(image);
+                break;
+            }
+            default: {
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png")).getImage();
+                this.setImage(image);
+                break;
+            }
+        }
+    }
+
     public int getSpeed() {
         return speed;
     }
@@ -19,6 +78,9 @@ public class MovableEntity extends Entity implements Movement{
         return null;
     }
     CollisionMap collisionMap = new CollisionMap();
+
+
+
     /*
     public  void moveUp(){
         System.out.println("UP");
@@ -91,22 +153,53 @@ public class MovableEntity extends Entity implements Movement{
 
     public void move() {
 
+//        switch (this.getDirection()) {
+//            case UP:
+//                this.getPixelPosition().y -= speed;
+//                //this.setImage(upImage);
+//                break;
+//            case DOWN:
+//                this.getPixelPosition().y += speed;
+//                //this.setImage(downImage);
+//                break;
+//            case LEFT:
+//                this.getPixelPosition().x -= speed;
+//                //this.setImage(leftImage);
+//                break;
+//            case RIGHT:
+//                this.getPixelPosition().x += speed;
+//                //this.setImage(rightImage);
+//                break;
+//            default:
+//                break;
         switch (this.getDirection()) {
             case UP:
+                this.setImage(upImage);
                 this.getPixelPosition().y -= speed;
-                //this.setImage(upImage);
+                this.jPanel.getGraphics().drawImage(this.image, getPixelPosition().x, getPixelPosition().y, null);
+                this.nextDirection = MovementType.UP;
+                this.jPanel.repaint();
                 break;
             case DOWN:
+                this.setImage(downImage);
                 this.getPixelPosition().y += speed;
-                //this.setImage(downImage);
+                this.jPanel.getGraphics().drawImage(this.image, getPixelPosition().x, getPixelPosition().y, null);
+                this.nextDirection = MovementType.DOWN;
+                this.jPanel.repaint();
                 break;
             case LEFT:
+                this.setImage(leftImage);
                 this.getPixelPosition().x -= speed;
-                //this.setImage(leftImage);
+                this.jPanel.getGraphics().drawImage(this.image, getPixelPosition().x, getPixelPosition().y, null);
+                this.nextDirection = MovementType.LEFT;
+                this.jPanel.repaint();
                 break;
             case RIGHT:
+                this.setImage(rightImage);
                 this.getPixelPosition().x += speed;
-                //this.setImage(rightImage);
+                this.jPanel.getGraphics().drawImage(this.image, getPixelPosition().x, getPixelPosition().y, null);
+                this.nextDirection = MovementType.RIGHT;
+                this.jPanel.repaint();
                 break;
             default:
                 break;
@@ -188,7 +281,7 @@ public class MovableEntity extends Entity implements Movement{
             }
 
          */
-        }
+    }
 
     @Override
     public String name() {
