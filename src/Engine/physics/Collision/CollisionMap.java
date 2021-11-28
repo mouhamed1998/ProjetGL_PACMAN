@@ -1,5 +1,6 @@
 package Engine.physics.Collision;
 
+import Engine.physics.movement.ImmovableEntity;
 import Engine.physics.movement.MovableEntity;
 import Engine.physics.movement.MovementType;
 import Pacman.Pacman;
@@ -14,7 +15,7 @@ public class CollisionMap implements CollisionWall{
      * @param wall wal in map
      */
     @Override
-    public void collisionWithWall(MovableEntity movableEntity, Wall wall) {
+    public void collisionWithWall(MovableEntity movableEntity, ImmovableEntity wall) {
         MovementType direction = movableEntity.getDirection();
         int movableX = movableEntity.getPixelPosition().x;
         int movableY = movableEntity.getPixelPosition().y;
@@ -79,5 +80,72 @@ public class CollisionMap implements CollisionWall{
         }
 
 
+    }
+
+    @Override
+    public boolean isCollisionWithWall(MovableEntity movableEntity, ImmovableEntity wall) {
+        MovementType direction = movableEntity.getDirection();
+        int movableX = movableEntity.getPosition().x;
+        int movableY = movableEntity.getPosition().y;
+        int wallX = wall.getPosition().x;
+        int wallY = wall.getPosition().y;
+        int wallSize  =  wall.getSize();
+        System.out.println("size :" + wallSize );
+
+        switch (direction){
+            case UP:{
+                int checkY = (movableY-wallY);
+                int checkX = Math.abs(movableX-wallX);
+                System.out.println("checkY :" + checkY );
+                System.out.println("checkX :" + checkX );
+                System.out.println("checkY>=0 && checkY<=wallSize && checkX<wallSize");
+                if(checkY>=0 && checkY<=wallSize && checkX<wallSize) {
+                    System.out.println("collision up");
+                    return  true;
+                }
+                break;
+            }
+            case DOWN: {
+                int checkY = (movableY-wallY);
+                int checkX = Math.abs(movableX-wallX);
+                System.out.println("checkY :" + checkY );
+                System.out.println("checkX :" + checkX );
+                System.out.println(" checkY >= 0 && checkY<=wallSize && checkX<wallSize");
+                if(checkY >= 0 && checkY<=wallSize && checkX<wallSize) {
+                    System.out.println("collision down");
+                    return true;
+                }
+                break;
+            }
+            case LEFT:{
+                int checkY = Math.abs(movableY-wallY);
+                int checkX = (movableX-wallX);
+                System.out.println("checkY :" + checkY );
+                System.out.println("checkX :" + checkX );
+                System.out.println("checkX>=0 && checkX<=wallSize && (checkY<wallSize");
+                if(checkX>=0&&checkX<=wallSize&&(checkY<wallSize)) {
+                    System.out.println("collision left");
+                    return true;
+                }
+                break;
+            }
+
+            case RIGHT:{
+                int checkY = Math.abs(movableY-wallY);
+                int checkX = (movableX-wallX);
+                System.out.println("checkY :" + checkY );
+                System.out.println("checkX :" + checkX );
+                System.out.println("checkX>=0 && checkX<=wallSize && (checkY<wallSize");
+                if(checkX >= 0 && checkX <=wallSize && checkY<wallSize) {
+                    System.out.println("collision right");
+                    return true;
+                }
+                break;
+            }
+            default:
+                break;
+        }
+        System.out.println("not collision");
+        return false;
     }
 }
