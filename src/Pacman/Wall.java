@@ -1,16 +1,16 @@
 package Pacman;
 
 import Engine.physics.movement.Entity;
+import Engine.physics.movement.ImmovableEntity;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Wall extends Entity {
+public class Wall extends ImmovableEntity {
     //private Image image;
     public Wall(Point position){
-      //  this.image = new ImageIcon("src/API/ressource/pacman_img/wall.jpeg").getImage();
-        this.setPosition(position);
-        this.setPixelPosition(new Point(position.x * getSize()+10,position.y*getSize()+10));
+        super(position);
+        //  this.image = new ImageIcon("src/API/ressource/pacman_img/wall.jpeg").getImage();
     }
     @Override
     public String getUrls() {

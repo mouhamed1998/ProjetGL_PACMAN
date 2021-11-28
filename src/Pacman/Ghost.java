@@ -1,46 +1,22 @@
 package Pacman;
 
 import Engine.physics.movement.Entity;
+import Engine.physics.movement.MovableEntity;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Ghost extends Entity {
+public class Ghost extends MovableEntity {
     private int number;
     //1 ---> Rouge;
+    private Image image;
 
     public int getNumber() {
         return number;
     }
-    private Image image;
 
     public Ghost(Point position, int number) {
-        this.number = number;
-        this.setPosition(position);
-        this.setPixelPosition(new Point(position.x*this.getSize()+10 ,position.y*this.getSize()+10));
-        switch (number){
-            case 1:{
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png")).getImage();
-                this.setImage(image);
-                break;
-            }
-            case 2: {
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png")).getImage();
-                this.setImage(image);
-                break;
-            }
-            case 3: {
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Clyde/Clyde-0.png")).getImage();
-                this.setImage(image);
-                break;
-            }
-            default: {
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png")).getImage();
-                this.setImage(image);
-                break;
-            }
-        }
-
+        super(position,number);
     }
 
     @Override

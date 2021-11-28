@@ -1,6 +1,7 @@
 package Pacman;
 
 import Engine.physics.Collision.CollisionMap;
+import Engine.physics.movement.ImmovableEntity;
 import Engine.physics.movement.MovableEntity;
 import Engine.physics.movement.MovementType;
 
@@ -16,18 +17,7 @@ public class Pacman extends MovableEntity {
     private JPanel jPanel;
     String url;
     public Pacman(Point position, JPanel jPanel){
-        this.jPanel = jPanel;
-        nextDirection = MovementType.STOP;
-        this.direction = MovementType.RIGHT;
-        this.setPosition(position);
-        this.setPixelPosition(new Point(position.x*getSize()+10 ,position.y*getSize()+10));
-        this.upImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/up/up.gif").getImage();
-        this.normalImage = new ImageIcon("src/API/ressource/pacman_img/right.gif").getImage();
-        this.image = new ImageIcon("src/API/ressource/pacman_img/right.gif").getImage();
-        this.downImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/down/down.gif").getImage();
-        this.leftImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/left/left.gif").getImage();
-        this.rightImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/right/right.gif").getImage();
-        this.setImage(normalImage);
+        super(position, jPanel);
     }
 
     public Pacman(Point position) {
@@ -142,13 +132,13 @@ public class Pacman extends MovableEntity {
     public Pacman() {
     }
 
-    public void verifyNextDirection(ArrayList<Wall> walls) {
+    public void verifyNextDirection(ArrayList<ImmovableEntity> walls) {
         if (nextDirection == MovementType.STOP) return;
         Pacman newPacman = new Pacman();
         newPacman.setDirection(this.nextDirection);
         newPacman.setPixelPosition(this.getPixelPosition());
         CollisionMap collision = new CollisionMap();
-        for (Wall wall : walls) {
+        for (ImmovableEntity wall : walls) {
             collision.collisionWithWall(newPacman, wall);
         }
         if (newPacman.getDirection() != MovementType.STOP) calculateNextDirection();

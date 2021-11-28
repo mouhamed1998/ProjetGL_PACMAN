@@ -1,16 +1,16 @@
 package Pacman;
 
 import Engine.physics.movement.Entity;
+import Engine.physics.movement.ImmovableEntity;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Gum extends Entity {
+public class Gum extends ImmovableEntity {
     private Image image;
     public Gum(Point position) {
+        super(position);
         this.image = new ImageIcon("src/API/ressource/pacman_img/big_gum.png").getImage();
-        this.setPosition(position);
-        this.setPixelPosition(new Point(position.x*getSize()+10 ,position.y*getSize()+10));
     }
 
     @Override
