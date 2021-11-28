@@ -1,20 +1,18 @@
 package Engine.Graphics;
 
 
+import Engine.physics.Collision.CollisionCircle;
 import Engine.physics.Collision.CollisionMap;
+import Engine.physics.Collision.CollisionRectangle;
 import Engine.physics.movement.Entity;
-import Engine.physics.movement.MovableEntity;
 import Pacman.Gum;
 import Pacman.Pacman;
 import Pacman.Wall;
 import Pacman.Ghost;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -30,7 +28,14 @@ public class Map extends JPanel {
     ArrayList<Ghost> ghosts;
     Image foodImage;
     Image[] pfoodImage;
-    //private int[][] mapGraphics;;
+    private JLabel jlabelScore;
+    private JLabel jlabelLife;
+    public int score = 0;
+    public int life =3;
+    private boolean isfirest;
+    public int getScore(){
+        return score;
+    }
     public  static  ArrayList<Entity> entities;
     public Pacman pacman ;
     void initImage() {
@@ -71,6 +76,10 @@ public class Map extends JPanel {
         }catch(Exception e){}
     }
 
+    public JLabel getJlabelLife() {
+        return jlabelLife;
+    }
+
     void initEntity(){
         foods = new ArrayList<>();
         pufoods = new ArrayList<>();
@@ -96,9 +105,15 @@ public class Map extends JPanel {
 
     }
     public Map(){
+        jlabelScore = new JLabel("Score:"+getScore());
+        jlabelLife = new JLabel("Life:"+life);
+        jlabelLife.setLocation(new Point(11*30 +10,30));
+        jlabelLife.setLocation(new Point(24*30 +10,11*30 +10));
         initImage();
         initEntity();
     }
+
+
     public void getResources(String filename) throws IOException {
 
         entities = new ArrayList<>();
@@ -181,8 +196,15 @@ public class Map extends JPanel {
         return entities;
     }
     JLabel imageLabel = new JLabel();
+    CollisionCircle collisionCircle = new CollisionCircle();
+    CollisionRectangle collisionRectangle = new CollisionRectangle();
+
+    public JLabel getJlabelScore() {
+        return jlabelScore;
+    }
+
     protected void paintComponent(Graphics g){
-        //pacman = (Pacman) getPacman();
+
         super.setBackground(new Color(3, 11, 33));
         super.paintComponents(g);
         for (Wall wall : walls) {
@@ -197,22 +219,58 @@ public class Map extends JPanel {
         int xPacman = pacman.getPixelPosition().x;
         int yPacman = pacman.getPixelPosition().y;
         g.drawImage(pacman.getImage(), xPacman, yPacman, null);
-        g.setColor(new Color(204, 122, 122));
         for(Gum f : foods){
-            //g.fillOval(f.position.x*28+22,f.position.y*28+22,4,4);
             int x = f.getPixelPosition().x;
             int y = f.getPixelPosition().y;
             g.drawImage(foodImage, x, y, null);
         }
 
-        //Draw PowerUpFoods
-        g.setColor(new Color(204, 174, 168));
+
         for(Gum f : pufoods){
             //g.fillOval(f.position.x*28+20,f.position.y*28+20,8,8);
             int x = f.getPixelPosition().x;
             int y = f.getPixelPosition().y;
             g.drawImage(f.getImage(), x, y,null);
         }
+        for(Gum gum: pufoods){
+            if(collisionCircle.isCollision(pacman, gum)){
+                pufoods.remove(gum);
+                score +=10;
+                jlabelScore.setText("Score:"+getScore());
+                break;
+            }
+
+        }
+        for(Gum gum: foods){
+            if(collisionCircle.isCollision(pacman, gum)){
+                foods.remove(gum);
+                score += 5;
+                jlabelScore.setText("Score:"+getScore());
+                break;
+            }
+        }
+        for(Ghost ghost : ghosts){
+            if(collisionRectangle.isCollision(pacman,ghost)){
+                ghosts.remove(ghost);
+                pacman.life = pacman.getLife()-1;
+                jlabelLife.setText("Life : " + pacman.getLife());
+                break;
+
+            }
+        }
+        jlabelScore.setForeground(Color.yellow);
+        jlabelLife.setForeground(Color.yellow);
+        jlabelScore.setLocation(new Point(30,11*30 +10));
+        jlabelLife.setLocation(new Point(24*30 +10,11*30 +10));
+        Font font = new Font("Arial",Font.BOLD , 20);
+        jlabelLife.setFont(font);
+        jlabelScore.setFont(font);
+
+
+
+
+
+
 
         /*
         for (Wall wall :walls){
