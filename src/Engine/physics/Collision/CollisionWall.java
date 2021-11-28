@@ -1,6 +1,7 @@
 package Engine.physics.Collision;
 
 import Engine.physics.movement.Entity;
+import Engine.physics.movement.ImmovableEntity;
 import Engine.physics.movement.MovableEntity;
 import Engine.physics.movement.Movement;
 import Pacman.Pacman;
@@ -11,7 +12,7 @@ public interface CollisionWall {
     //public void CollisionDOWNWithWall(MovableEntity entity, Entity wall);
     //public void CollisionLEFTWithWall(MovableEntity entity, Entity wall);
     //public void CollisionRIGHTWithWall(MovableEntity entity, Entity wall);
-    public void collisionWithWall(MovableEntity movableEntity, Wall wall);
-    boolean isCollisionWithWall(MovableEntity movableEntity, Wall wall);
+    public void collisionWithWall(MovableEntity movableEntity, ImmovableEntity wall);
+    boolean isCollisionWithWall(MovableEntity movableEntity, ImmovableEntity wall);
 
 }
