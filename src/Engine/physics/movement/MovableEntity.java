@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class MovableEntity extends Entity implements Movement{
     public MovementType direction = MovementType.STOP;
-    int speed=30;
+    int speed=5;
     protected Image  normalImage, upImage, downImage, leftImage,rightImage,image;
     public MovementType nextDirection;
     protected JPanel jPanel;
