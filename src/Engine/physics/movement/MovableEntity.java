@@ -2,12 +2,16 @@ package Engine.physics.movement;
 
 import Engine.physics.Collision.CollisionMap;
 
+import javax.swing.*;
+import java.util.Map;
+
 public class MovableEntity extends Entity implements Movement{
     public MovementType direction = MovementType.STOP;
-    int speed=30;
+    int speed=1;
     public int getSpeed() {
         return speed;
     }
+    private JPanel map;
     public MovementType getDirection(){
         return direction;
     }
@@ -19,6 +23,13 @@ public class MovableEntity extends Entity implements Movement{
         return null;
     }
     CollisionMap collisionMap = new CollisionMap();
+    public JPanel getMap(){
+        return map;
+    }
+
+    public void setMap(JPanel map){
+        this.map = map;
+    }
     /*
     public  void moveUp(){
         System.out.println("UP");

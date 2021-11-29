@@ -202,6 +202,9 @@ public class Pacman extends MovableEntity {
         }
 
     }
+    public JPanel getMap(){
+        return this.jPanel;
+    }
 
 
 }

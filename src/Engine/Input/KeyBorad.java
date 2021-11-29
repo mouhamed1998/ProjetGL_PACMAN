@@ -8,6 +8,7 @@ import Engine.physics.movement.MovementType;
 import Pacman.Pacman;
 import Pacman.Wall;
 
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -26,14 +27,18 @@ public class KeyBorad extends KeyAdapter implements KeyListener {
         if(key == KeyEvent.VK_UP){
             System.out.println("UP");
             this.pacman.goUp();
+            /*
+            MovableEntity pac = new Pacman(new Point(pacman.getPosition().x, pacman.getPosition().y), pacman.getMap());
+            int y = pacman.getPixelPosition().y - pacman.speed;
+            pac.setPixelPosition(new Point(pacman.getPosition().x, ));
 
+             */
             for (Entity entity : Map.walls){
                 if(entity instanceof Wall){
                     collisionMap.collisionWithWall(pacman, (Wall) entity);
                 }
 
             }
-
             this.pacman.move();
 
             //this.pacman.goUp();

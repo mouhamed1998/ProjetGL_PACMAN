@@ -26,6 +26,7 @@ public class Map extends JPanel {
     ArrayList<Gum> foods;
     ArrayList<Gum> pufoods;
     ArrayList<Ghost> ghosts;
+    ArrayList<Ghost> realGhosts;
     Image foodImage;
     Image[] pfoodImage;
     private JLabel jlabelScore;
@@ -84,6 +85,7 @@ public class Map extends JPanel {
         foods = new ArrayList<>();
         pufoods = new ArrayList<>();
         ghosts = new ArrayList<>();
+        realGhosts = new ArrayList<>();
         for(Point foodPosition: mapNew.getCoinPositions()) {
             foods.add(new Gum(new Point(foodPosition.x, foodPosition.y)));
         }
@@ -94,6 +96,7 @@ public class Map extends JPanel {
             pufoods.add(coin);
 
         }
+
         this.pacman = new Pacman(mapNew.getPacmanPosition(), this);
         //foods = new ArrayList<>();
         //pufoods = new ArrayList<>();
@@ -102,6 +105,11 @@ public class Map extends JPanel {
 
         ghosts = new ArrayList<>();
         ghosts.addAll(mapNew.getGhostsData());
+        for (Ghost ghost : ghosts){
+            Ghost gh = new Ghost(ghost, this);
+            realGhosts.add(gh);
+
+        }
 
     }
     public Map(){
@@ -210,7 +218,7 @@ public class Map extends JPanel {
         for (Wall wall : walls) {
             g.drawImage(wall.getImage(), wall.getPixelPosition().x, wall.getPixelPosition().y, null);
         }
-        for(Ghost gh : ghosts) {
+        for(Ghost gh : realGhosts) {
             Image ghostImage = gh.getImage();
             int xGhost = gh.getPixelPosition().x;
             int yGhost = gh.getPixelPosition().y;
@@ -249,15 +257,22 @@ public class Map extends JPanel {
                 break;
             }
         }
-        for(Ghost ghost : ghosts){
+
+        for(Ghost ghost : realGhosts){
             if(collisionRectangle.isCollision(pacman,ghost)){
-                ghosts.remove(ghost);
+                realGhosts.remove(ghost);
                 pacman.life = pacman.getLife()-1;
                 jlabelLife.setText("Life : " + pacman.getLife());
                 break;
 
             }
         }
+        for(Ghost ghost : realGhosts){
+            ghost.move();
+
+        }
+
+
         jlabelScore.setForeground(Color.yellow);
         jlabelLife.setForeground(Color.yellow);
         jlabelScore.setLocation(new Point(30,11*30 +10));
@@ -265,19 +280,20 @@ public class Map extends JPanel {
         Font font = new Font("Arial",Font.BOLD , 20);
         jlabelLife.setFont(font);
         jlabelScore.setFont(font);
-
-
-
-
-
-
-
         /*
-        for (Wall wall :walls){
-            collisionMap.collisionWithWall(pacman,wall);
+        for(Ghost ghost :realGhosts){
+            ghost.nextMoveCalculateByAI(this);
+            ghost.move();
         }
-        pacman.verifyNextDirection(walls);
-        pacman.move();
+
+         */
+        /*
+        for (Ghost ghost: realGhosts){
+            ghost.verifyNextDirection(walls);
+            ghost.move();
+        }
+
+         */
 
         /*
         for (Entity entity :entities){
