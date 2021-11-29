@@ -187,6 +187,7 @@ public class Ghost extends MovableEntity {
 
     @Override
     public void move() {
+
         CollisionMap collisionMap = new CollisionMap();
         for (Entity entity : Map.walls){
             if(entity instanceof Wall){

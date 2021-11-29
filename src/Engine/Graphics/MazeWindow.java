@@ -33,10 +33,13 @@ public class MazeWindow extends JFrame {
         this.addKeyListener(new KeyBorad(pacman));
         setVisible(true);
         System.out.println();
+        /*
         while (true){
             if (map.getScore()<0)
                 System.exit(0);
         }
+
+         */
     }
 
 }

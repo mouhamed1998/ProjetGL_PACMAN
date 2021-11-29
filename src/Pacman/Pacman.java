@@ -1,6 +1,8 @@
 package Pacman;
 
+import Engine.Graphics.Map;
 import Engine.physics.Collision.CollisionMap;
+import Engine.physics.movement.Entity;
 import Engine.physics.movement.MovableEntity;
 import Engine.physics.movement.MovementType;
 
@@ -12,7 +14,7 @@ public class Pacman extends MovableEntity {
 
     private Image  normalImage, upImage, downImage, leftImage,rightImage,image;
     public MovementType nextDirection;
-    public double speed =5;
+    public double speed =1;
 
     public int life =3;
     private JPanel jPanel;
@@ -115,27 +117,27 @@ public class Pacman extends MovableEntity {
 
     @Override
     public void goUp() {
-        direction = MovementType.UP;
+        this.nextDirection = MovementType.UP;
     }
 
     @Override
     public void goDown() {
-        direction = MovementType.DOWN;
+        this.nextDirection = MovementType.DOWN;
     }
 
     @Override
     public void goLeft() {
-        direction = MovementType.LEFT;
+        this.nextDirection = MovementType.LEFT;
     }
 
     @Override
     public void goRight() {
-        direction = MovementType.RIGHT;
+        this.nextDirection = MovementType.RIGHT;
     }
 
     @Override
     public void stop() {
-        direction = MovementType.STOP;
+        this.direction = MovementType.STOP;
     }
 
     public Pacman() {
@@ -171,28 +173,28 @@ public class Pacman extends MovableEntity {
                 this.setImage(upImage);
                 this.getPixelPosition().y -= speed;
                 this.jPanel.getGraphics().drawImage(this.image, getPixelPosition().x, getPixelPosition().y, null);
-                this.nextDirection = MovementType.UP;
+                //this.nextDirection = MovementType.UP;
                 this.jPanel.repaint();
                 break;
             case DOWN:
                 this.setImage(downImage);
                 this.getPixelPosition().y += speed;
                 this.jPanel.getGraphics().drawImage(this.image, getPixelPosition().x, getPixelPosition().y, null);
-                this.nextDirection = MovementType.DOWN;
+                //this.nextDirection = MovementType.DOWN;
                 this.jPanel.repaint();
                 break;
             case LEFT:
                 this.setImage(leftImage);
                 this.getPixelPosition().x -= speed;
                 this.jPanel.getGraphics().drawImage(this.image, getPixelPosition().x, getPixelPosition().y, null);
-                this.nextDirection = MovementType.LEFT;
+                //this.nextDirection = MovementType.LEFT;
                 this.jPanel.repaint();
                 break;
             case RIGHT:
                 this.setImage(rightImage);
                 this.getPixelPosition().x += speed;
                 this.jPanel.getGraphics().drawImage(this.image, getPixelPosition().x, getPixelPosition().y, null);
-                this.nextDirection = MovementType.RIGHT;
+                //this.nextDirection = MovementType.RIGHT;
                 this.jPanel.repaint();
                 break;
             default:

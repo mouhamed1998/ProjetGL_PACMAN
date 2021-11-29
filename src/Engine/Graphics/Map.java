@@ -218,12 +218,7 @@ public class Map extends JPanel {
         for (Wall wall : walls) {
             g.drawImage(wall.getImage(), wall.getPixelPosition().x, wall.getPixelPosition().y, null);
         }
-        for(Ghost gh : realGhosts) {
-            Image ghostImage = gh.getImage();
-            int xGhost = gh.getPixelPosition().x;
-            int yGhost = gh.getPixelPosition().y;
-            g.drawImage(ghostImage, xGhost, yGhost, null);
-        }
+
         int xPacman = pacman.getPixelPosition().x;
         int yPacman = pacman.getPixelPosition().y;
         g.drawImage(pacman.getImage(), xPacman, yPacman, null);
@@ -239,6 +234,12 @@ public class Map extends JPanel {
             int x = f.getPixelPosition().x;
             int y = f.getPixelPosition().y;
             g.drawImage(f.getImage(), x, y,null);
+        }
+        for(Ghost gh : realGhosts) {
+            Image ghostImage = gh.getImage();
+            int xGhost = gh.getPixelPosition().x;
+            int yGhost = gh.getPixelPosition().y;
+            g.drawImage(ghostImage, xGhost, yGhost, null);
         }
         for(Gum gum: pufoods){
             if(collisionCircle.isCollision(pacman, gum)){
@@ -257,7 +258,6 @@ public class Map extends JPanel {
                 break;
             }
         }
-
         for(Ghost ghost : realGhosts){
             if(collisionRectangle.isCollision(pacman,ghost)){
                 realGhosts.remove(ghost);
@@ -299,13 +299,12 @@ public class Map extends JPanel {
         }
 
          */
-        /*
+
         for (Ghost ghost: realGhosts){
             ghost.verifyNextDirection(walls);
             ghost.move();
         }
 
-         */
 
         /*
         for (Entity entity :entities){
@@ -333,16 +332,14 @@ public class Map extends JPanel {
         }
 
          */
-        /*
+
 
         for (Wall wall :walls){
             collisionMap.collisionWithWall(pacman,wall);
         }
         pacman.verifyNextDirection(walls);
         pacman.move();
-
-
-
+        /*
         setVisible(true);
         /*
         for (Entity entity : entities){
