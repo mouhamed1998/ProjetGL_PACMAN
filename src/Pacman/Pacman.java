@@ -12,7 +12,7 @@ public class Pacman extends MovableEntity {
 
     private Image  normalImage, upImage, downImage, leftImage,rightImage,image;
     public MovementType nextDirection;
-    public double speed =1;
+    public double speed =5;
 
     public int life =3;
     private JPanel jPanel;

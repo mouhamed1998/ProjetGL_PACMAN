@@ -28,21 +28,15 @@ public class MazeWindow extends JFrame {
         getContentPane().add(map.getJlabelScore(),BorderLayout.SOUTH);
         getContentPane().add(map.getJlabelLife(),BorderLayout.NORTH);
         getContentPane().add(map, BorderLayout.CENTER);
-
         //getContentPane().add(scoreboard, BorderLayout.SOUTH);
         getContentPane().setBackground(new Color(3, 11, 33));
         this.addKeyListener(new KeyBorad(pacman));
         setVisible(true);
         System.out.println();
-        /*
         while (true){
-            repaint();
+            if (map.getScore()<0)
+                System.exit(0);
         }
-
-         */
-
-
-
     }
 
 }

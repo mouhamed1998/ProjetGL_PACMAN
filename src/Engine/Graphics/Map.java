@@ -32,7 +32,7 @@ public class Map extends JPanel {
     private JLabel jlabelScore;
     private JLabel jlabelLife;
     public int score = 0;
-    public int life =3;
+    public int life =0;
     private boolean isfirest;
     public int getScore(){
         return score;
@@ -274,6 +274,20 @@ public class Map extends JPanel {
         Font font = new Font("Arial",Font.BOLD , 20);
         jlabelLife.setFont(font);
         jlabelScore.setFont(font);
+        Object panel;
+        //JOptionPane jOptionPane = new JOptionPane(this, JOptionPane.PLAIN_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
+        //jOptionPane.createDialog(this,"Game Over");
+
+        if(life <0){
+
+            int result = JOptionPane.showConfirmDialog(null, "You lose GAME OVER","QUIT", JOptionPane.YES_NO_OPTION);
+            if(result == JOptionPane.YES_OPTION){
+                System.exit(0);
+            }
+
+            //}
+        }
+        /*
         for(Ghost ghost : realGhosts){
             ghost.move();
 
@@ -319,13 +333,17 @@ public class Map extends JPanel {
         }
 
          */
-
+        /*
 
         for (Wall wall :walls){
             collisionMap.collisionWithWall(pacman,wall);
         }
         pacman.verifyNextDirection(walls);
         pacman.move();
+
+
+
+        setVisible(true);
         /*
         for (Entity entity : entities){
             collisionMap.CollisionWithWall(pacman, entity);
@@ -333,5 +351,9 @@ public class Map extends JPanel {
 
          */
 
+    }
+
+    public int getLife() {
+        return life;
     }
 }
