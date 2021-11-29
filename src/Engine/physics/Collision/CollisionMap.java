@@ -1,6 +1,5 @@
 package Engine.physics.Collision;
 
-import Engine.physics.movement.ImmovableEntity;
 import Engine.physics.movement.MovableEntity;
 import Engine.physics.movement.MovementType;
 import Pacman.Pacman;
@@ -15,7 +14,7 @@ public class CollisionMap implements CollisionWall{
      * @param wall wal in map
      */
     @Override
-    public void collisionWithWall(MovableEntity movableEntity, ImmovableEntity wall) {
+    public void collisionWithWall(MovableEntity movableEntity, Wall wall) {
         MovementType direction = movableEntity.getDirection();
         int movableX = movableEntity.getPixelPosition().x;
         int movableY = movableEntity.getPixelPosition().y;
@@ -30,7 +29,7 @@ public class CollisionMap implements CollisionWall{
                 int checkX = Math.abs(movableX-wallX);
                 if(checkY>=0 && checkY<=wallSize && checkX<wallSize) {
                     System.out.println("Up collision with map");
-                    System.out.println("Pacman: " + movableX + " " + movableY);
+                    System.out.println("GHost: " + movableX + " " + movableY);
                     System.out.println("Wall: " + wallX + " " + wallY);
                     movableEntity.stop();
                 }
@@ -44,7 +43,7 @@ public class CollisionMap implements CollisionWall{
                 if(checkY >= 0 && checkY<=wallSize && checkX<wallSize) {
                     movableEntity.stop();
                     System.out.println("Pacman: " + movableX + " " + movableY);
-                    System.out.println("Wall: " + wallX + " " + wallY);
+                    System.out.println("GHost: " + wallX + " " + wallY);
                     System.out.println("Down collision with map");
                 }
                 break;
@@ -55,7 +54,7 @@ public class CollisionMap implements CollisionWall{
                 int checkY = Math.abs(movableY - wallY);
                 if(checkX>=0&&checkX<=wallSize&&(checkY<wallSize)) {
                     System.out.println("Pacman: " + movableX + " " + movableY + " " + movableSize);
-                    System.out.println("Wall: " + wallX + " " + wallY + " " + wallSize);
+                    System.out.println("GHost: " + wallX + " " + wallY + " " + wallSize);
                     System.out.println("Left collision with map");
                     movableEntity.stop();
                 }
@@ -69,7 +68,7 @@ public class CollisionMap implements CollisionWall{
                 if(checkX >= 0 && checkX <=wallSize && checkY<wallSize) {
                     movableEntity.stop();
                     System.out.println("Right collision with map");
-                    System.out.println("Pacman: " + movableX + " " + movableY);
+                    System.out.println("GHost: " + movableX + " " + movableY);
                     System.out.println("Wall: " + wallX + " " + wallY);
                 }
                 break;
@@ -81,71 +80,75 @@ public class CollisionMap implements CollisionWall{
 
 
     }
-
-    @Override
-    public boolean isCollisionWithWall(MovableEntity movableEntity, ImmovableEntity wall) {
+    public boolean iscollisionWithWall(MovableEntity movableEntity, Wall wall) {
         MovementType direction = movableEntity.getDirection();
-        int movableX = movableEntity.getPosition().x;
-        int movableY = movableEntity.getPosition().y;
-        int wallX = wall.getPosition().x;
-        int wallY = wall.getPosition().y;
+        int movableX = movableEntity.getPixelPosition().x;
+        int movableY = movableEntity.getPixelPosition().y;
+        int wallX = wall.getPixelPosition().x;
+        int wallY = wall.getPixelPosition().y;
         int wallSize  =  wall.getSize();
-        System.out.println("size :" + wallSize );
-
+        int movableSize = movableEntity.getSize();
         switch (direction){
-            case UP:{
+            case UP: {
+                //System.out.println("in up");
                 int checkY = (movableY-wallY);
                 int checkX = Math.abs(movableX-wallX);
-                System.out.println("checkY :" + checkY );
-                System.out.println("checkX :" + checkX );
-                System.out.println("checkY>=0 && checkY<=wallSize && checkX<wallSize");
                 if(checkY>=0 && checkY<=wallSize && checkX<wallSize) {
-                    System.out.println("collision up");
-                    return  true;
-                }
-                break;
-            }
-            case DOWN: {
-                int checkY = (movableY-wallY);
-                int checkX = Math.abs(movableX-wallX);
-                System.out.println("checkY :" + checkY );
-                System.out.println("checkX :" + checkX );
-                System.out.println(" checkY >= 0 && checkY<=wallSize && checkX<wallSize");
-                if(checkY >= 0 && checkY<=wallSize && checkX<wallSize) {
-                    System.out.println("collision down");
+                    System.out.println("Up collision with map");
+                    System.out.println("GHost: " + movableX + " " + movableY);
+                    System.out.println("Wall: " + wallX + " " + wallY);
+                    movableEntity.stop();
                     return true;
                 }
                 break;
             }
-            case LEFT:{
-                int checkY = Math.abs(movableY-wallY);
+
+            case DOWN: {
+                //System.out.println("in down");
+                int checkY = (wallY-movableY);
+                int checkX = Math.abs(movableX-wallX);
+                if(checkY >= 0 && checkY<=wallSize && checkX<wallSize) {
+                    movableEntity.stop();
+                    System.out.println("Pacman: " + movableX + " " + movableY);
+                    System.out.println("GHost: " + wallX + " " + wallY);
+                    System.out.println("Down collision with map");
+                    return true;
+                }
+                break;
+            }
+            case LEFT: {
+                //System.out.println("in left");
                 int checkX = (movableX-wallX);
-                System.out.println("checkY :" + checkY );
-                System.out.println("checkX :" + checkX );
-                System.out.println("checkX>=0 && checkX<=wallSize && (checkY<wallSize");
+                int checkY = Math.abs(movableY - wallY);
                 if(checkX>=0&&checkX<=wallSize&&(checkY<wallSize)) {
-                    System.out.println("collision left");
+                    System.out.println("Pacman: " + movableX + " " + movableY + " " + movableSize);
+                    System.out.println("GHost: " + wallX + " " + wallY + " " + wallSize);
+                    System.out.println("Left collision with map");
+                    movableEntity.stop();
                     return true;
                 }
                 break;
             }
 
             case RIGHT:{
-                int checkY = Math.abs(movableY-wallY);
-                int checkX = (movableX-wallX);
-                System.out.println("checkY :" + checkY );
-                System.out.println("checkX :" + checkX );
-                System.out.println("checkX>=0 && checkX<=wallSize && (checkY<wallSize");
+                //System.out.println("in right");
+                int checkX = (wallX - movableX);
+                int checkY = Math.abs(wallY-movableY);
                 if(checkX >= 0 && checkX <=wallSize && checkY<wallSize) {
-                    System.out.println("collision right");
+                    movableEntity.stop();
+                    System.out.println("Right collision with map");
+                    System.out.println("GHost: " + movableX + " " + movableY);
+                    System.out.println("Wall: " + wallX + " " + wallY);
                     return true;
                 }
                 break;
             }
             default:
                 break;
+
         }
-        System.out.println("not collision");
+
         return false;
     }
+
 }

@@ -5,14 +5,10 @@ import Engine.physics.Collision.CollisionCircle;
 import Engine.physics.Collision.CollisionMap;
 import Engine.physics.Collision.CollisionRectangle;
 import Engine.physics.movement.Entity;
-
 import Pacman.Gum;
 import Pacman.Pacman;
 import Pacman.Wall;
 import Pacman.Ghost;
-
-import Engine.physics.movement.ImmovableEntity;
-import Engine.physics.movement.MovableEntity;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,16 +17,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Map extends JPanel {
-
     int index_pacman = 0;
     int index = 0;
-    public static ArrayList<ImmovableEntity> walls = new ArrayList<>();
+    public static ArrayList<Wall> walls = new ArrayList<>();
     MapNew mapNew  = new MapNew();
     int[][] map ;
     Image[] mapSegments = new Image[28];;
-    ArrayList<ImmovableEntity> foods;
-    ArrayList<ImmovableEntity> pufoods;
-    ArrayList<MovableEntity> ghosts;
+    ArrayList<Gum> foods;
+    ArrayList<Gum> pufoods;
+    ArrayList<Ghost> ghosts;
+    ArrayList<Ghost> realGhosts;
     Image foodImage;
     Image[] pfoodImage;
     private JLabel jlabelScore;
@@ -42,7 +38,7 @@ public class Map extends JPanel {
         return score;
     }
     public  static  ArrayList<Entity> entities;
-    public MovableEntity pacman ;
+    public Pacman pacman ;
     void initImage() {
         mapNew.getMapFromResource("src/API/mapS.txt");
         mapNew.adjustNewMap();
@@ -59,7 +55,7 @@ public class Map extends JPanel {
             }
         }
         for(Point mapPoint : mapNew.getWallPositions()) {
-            ImmovableEntity wall = new ImmovableEntity(mapPoint);
+            Wall wall = new Wall(mapPoint);
             wall.setImage(mapSegments[map[mapPoint.y][mapPoint.x]]);
             walls.add(wall);
         }
@@ -89,17 +85,19 @@ public class Map extends JPanel {
         foods = new ArrayList<>();
         pufoods = new ArrayList<>();
         ghosts = new ArrayList<>();
+        realGhosts = new ArrayList<>();
         for(Point foodPosition: mapNew.getCoinPositions()) {
-            foods.add(new ImmovableEntity(new Point(foodPosition.x, foodPosition.y)));
+            foods.add(new Gum(new Point(foodPosition.x, foodPosition.y)));
         }
         for(Point puFood : mapNew.getPuCoinPositions()) {
-            ImmovableEntity coin = new ImmovableEntity(new Point(puFood.x, puFood.y));
+            Gum coin = new Gum(new Point(puFood.x, puFood.y));
             int random = new Random().nextInt(5);
             coin.setImage(pfoodImage[random]);
             pufoods.add(coin);
 
         }
-        this.pacman = new MovableEntity(mapNew.getPacmanPosition(), this);
+
+        this.pacman = new Pacman(mapNew.getPacmanPosition(), this);
         //foods = new ArrayList<>();
         //pufoods = new ArrayList<>();
         ghosts = new ArrayList<>();
@@ -107,6 +105,11 @@ public class Map extends JPanel {
 
         ghosts = new ArrayList<>();
         ghosts.addAll(mapNew.getGhostsData());
+        for (Ghost ghost : ghosts){
+            Ghost gh = new Ghost(ghost, this);
+            realGhosts.add(gh);
+
+        }
 
     }
     public Map(){
@@ -116,6 +119,7 @@ public class Map extends JPanel {
         jlabelLife.setLocation(new Point(24*30 +10,11*30 +10));
         initImage();
         initEntity();
+
     }
 
 
@@ -144,29 +148,29 @@ public class Map extends JPanel {
             for (char c : line.toCharArray()){
                 System.out.println(c);
                 if(c=='G'){
-                    entities.add(new MovableEntity(new Point(j,i),1));
+                    entities.add(new Ghost(new Point(j,i),1));
                     index_pacman++;
                     j++;
                 }
                 if(c=='g'){
-                    entities.add(new MovableEntity(new Point(j,i),2));
+                    entities.add(new Ghost(new Point(j,i),2));
                     j++;
                     index_pacman++;
                 }
                 if(c=='M'){
-                    entities.add(new ImmovableEntity(new Point(j,i)));
+                    entities.add(new Wall(new Point(j,i)));
                     //walls.add(new Wall(new Point(j,i)));
                     //mapGraphics[i][j]=0;
                     j++;
                     index_pacman++;
                 }
                 if (c=='o'){
-                    entities.add(new ImmovableEntity(new Point(j,i)));
+                    entities.add(new Gum(new Point(j,i)));
                     index_pacman++;
                     j++;
                 }
                 if (c=='P'){
-                    entities.add(new MovableEntity(new Point(j,i), this));
+                    entities.add(new Pacman(new Point(j,i), this));
                     index = index_pacman;
                     j++;
                 }
@@ -187,7 +191,7 @@ public class Map extends JPanel {
 
 
     }
-    public MovableEntity getPacman(){
+    public Pacman getPacman(){
         return pacman;
     }
     /*
@@ -209,13 +213,12 @@ public class Map extends JPanel {
     }
 
     protected void paintComponent(Graphics g){
-
         super.setBackground(new Color(3, 11, 33));
         super.paintComponents(g);
-        for (ImmovableEntity wall : walls) {
+        for (Wall wall : walls) {
             g.drawImage(wall.getImage(), wall.getPixelPosition().x, wall.getPixelPosition().y, null);
         }
-        for(MovableEntity gh : ghosts) {
+        for(Ghost gh : realGhosts) {
             Image ghostImage = gh.getImage();
             int xGhost = gh.getPixelPosition().x;
             int yGhost = gh.getPixelPosition().y;
@@ -224,13 +227,7 @@ public class Map extends JPanel {
         int xPacman = pacman.getPixelPosition().x;
         int yPacman = pacman.getPixelPosition().y;
         g.drawImage(pacman.getImage(), xPacman, yPacman, null);
-
         for(Gum f : foods){
-
-        g.setColor(new Color(204, 122, 122));
-        for(ImmovableEntity f : foods){
-            //g.fillOval(f.position.x*28+22,f.position.y*28+22,4,4);
-
             int x = f.getPixelPosition().x;
             int y = f.getPixelPosition().y;
             g.drawImage(foodImage, x, y, null);
@@ -238,10 +235,6 @@ public class Map extends JPanel {
 
 
         for(Gum f : pufoods){
-        //Draw PowerUpFoods
-        g.setColor(new Color(204, 174, 168));
-        for(ImmovableEntity f : pufoods){
-
             //g.fillOval(f.position.x*28+20,f.position.y*28+20,8,8);
             int x = f.getPixelPosition().x;
             int y = f.getPixelPosition().y;
@@ -264,9 +257,10 @@ public class Map extends JPanel {
                 break;
             }
         }
-        for(Ghost ghost : ghosts){
+
+        for(Ghost ghost : realGhosts){
             if(collisionRectangle.isCollision(pacman,ghost)){
-                ghosts.remove(ghost);
+                realGhosts.remove(ghost);
                 pacman.life = pacman.getLife()-1;
                 jlabelLife.setText("Life : " + pacman.getLife());
                 break;
@@ -280,19 +274,24 @@ public class Map extends JPanel {
         Font font = new Font("Arial",Font.BOLD , 20);
         jlabelLife.setFont(font);
         jlabelScore.setFont(font);
+        for(Ghost ghost : realGhosts){
+            ghost.move();
 
-
-
-
-
-
-
-        /*
-        for (Wall wall :walls){
-            collisionMap.collisionWithWall(pacman,wall);
         }
-        pacman.verifyNextDirection(walls);
-        pacman.move();
+        /*
+        for(Ghost ghost :realGhosts){
+            ghost.nextMoveCalculateByAI(this);
+            ghost.move();
+        }
+
+         */
+        /*
+        for (Ghost ghost: realGhosts){
+            ghost.verifyNextDirection(walls);
+            ghost.move();
+        }
+
+         */
 
         /*
         for (Entity entity :entities){
@@ -321,7 +320,7 @@ public class Map extends JPanel {
 
          */
 
-        /*
+
         for (Wall wall :walls){
             collisionMap.collisionWithWall(pacman,wall);
         }

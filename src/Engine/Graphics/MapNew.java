@@ -1,8 +1,6 @@
 package Engine.Graphics;
 
 
-import Engine.physics.movement.ImmovableEntity;
-import Engine.physics.movement.MovableEntity;
 import Pacman.Ghost;
 
 import java.awt.Point;
@@ -14,7 +12,7 @@ public class MapNew {
     private int[][] mapGraphic;
     private ArrayList<Point> coinPositions;
     private ArrayList<Point> puCoinPositions;
-    private ArrayList<MovableEntity> ghostsData;
+    private ArrayList<Ghost> ghostsData;
     private ArrayList<Point> wallPositions;
     private Point pacmanPosition;
     private Point ghostBasePosition;
@@ -33,11 +31,11 @@ public class MapNew {
         this.puCoinPositions = puCoinPositions;
     }
 
-    public ArrayList<MovableEntity> getGhostsData() {
+    public ArrayList<Ghost> getGhostsData() {
         return ghostsData;
     }
 
-    public void setGhostsData(ArrayList<MovableEntity> ghostsData) {
+    public void setGhostsData(ArrayList<Ghost> ghostsData) {
         this.ghostsData = ghostsData;
     }
 
@@ -103,15 +101,15 @@ public class MapNew {
                 for(char c : line.toCharArray()) {
                     if(c == '1'){
                         mapGraphic[i][j] = 0;
-                        this.ghostsData.add(new MovableEntity(new Point(j,i), 1));
+                        this.ghostsData.add(new Ghost(new Point(j,i), 1));
                     }
                     if(c == '2'){
                         mapGraphic[i][j] = 0;
-                        this.ghostsData.add(new MovableEntity(new Point(j,i), 2));
+                        this.ghostsData.add(new Ghost(new Point(j,i), 2));
                     }
                     if(c == '3'){
                         mapGraphic[i][j] = 0;
-                        this.ghostsData.add(new MovableEntity(new Point(j,i), 3));
+                        this.ghostsData.add(new Ghost(new Point(j,i), 3));
                     }
                     if(c == 'P'){
                         mapGraphic[i][j] = 0;
@@ -374,3 +372,4 @@ public class MapNew {
     }
 
 }
+
