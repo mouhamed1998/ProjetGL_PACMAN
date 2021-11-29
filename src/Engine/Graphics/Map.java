@@ -119,6 +119,7 @@ public class Map extends JPanel {
         jlabelLife.setLocation(new Point(24*30 +10,11*30 +10));
         initImage();
         initEntity();
+
     }
 
 
@@ -212,7 +213,6 @@ public class Map extends JPanel {
     }
 
     protected void paintComponent(Graphics g){
-
         super.setBackground(new Color(3, 11, 33));
         super.paintComponents(g);
         for (Wall wall : walls) {
@@ -267,12 +267,6 @@ public class Map extends JPanel {
 
             }
         }
-        for(Ghost ghost : realGhosts){
-            ghost.move();
-
-        }
-
-
         jlabelScore.setForeground(Color.yellow);
         jlabelLife.setForeground(Color.yellow);
         jlabelScore.setLocation(new Point(30,11*30 +10));
@@ -280,6 +274,10 @@ public class Map extends JPanel {
         Font font = new Font("Arial",Font.BOLD , 20);
         jlabelLife.setFont(font);
         jlabelScore.setFont(font);
+        for(Ghost ghost : realGhosts){
+            ghost.move();
+
+        }
         /*
         for(Ghost ghost :realGhosts){
             ghost.nextMoveCalculateByAI(this);
@@ -322,7 +320,7 @@ public class Map extends JPanel {
 
          */
 
-        /*
+
         for (Wall wall :walls){
             collisionMap.collisionWithWall(pacman,wall);
         }

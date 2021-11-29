@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 
 public class MazeWindow extends JFrame {
-    MovableEntity pacman ;
+    Pacman pacman ;
     public MazeWindow() throws IOException, InterruptedException {
         setTitle("GL-Projet-PACMAN");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -33,7 +33,6 @@ public class MazeWindow extends JFrame {
         getContentPane().setBackground(new Color(3, 11, 33));
         this.addKeyListener(new KeyBorad(pacman));
         setVisible(true);
-
         System.out.println();
         /*
         while (true){
@@ -41,12 +40,6 @@ public class MazeWindow extends JFrame {
         }
 
          */
-
-
-        while (true){
-            repaint();
-        }
-
 
 
 
