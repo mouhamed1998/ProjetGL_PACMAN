@@ -16,11 +16,11 @@ import java.util.Random;
 
 public class Ghost extends MovableEntity {
     //public RandomMovement AI;
-    public AstarAI AI;
+    public AiInterface AI;
     //import AI.RandomMovement;
     private int number;
     public MovementType nextDirection;
-    private double speed = 1;
+    private double speed = 3;
     private Map map;
     //1 ---> Rouge;
 

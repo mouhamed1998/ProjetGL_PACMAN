@@ -17,8 +17,6 @@ public class MazeWindow extends JFrame {
         setResizable(true);
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(19, 53, 170));
-
-
         Map map = new Map();
         map.getResources("src/API/mapS.txt");
         this.pacman = map.getPacman();

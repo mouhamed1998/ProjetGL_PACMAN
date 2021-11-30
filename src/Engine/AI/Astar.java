@@ -15,7 +15,6 @@ class Cell implements Comparable<Cell>{
         this.x = x;
         this.y = y;
     }
-
     @Override
     public int compareTo(Cell o) {
         if(o == null) return -1;
@@ -42,16 +41,6 @@ public class Astar {
     Cell endCell;
     Cell startCell;
 
-    public static void main(String[] args) {
-        int[][] walls = {{2, 2}, {2, 3}, {2, 10}, {2, 11}, {2, 12}, {3, 3}, {3, 9}, {3, 10},
-                        {4, 3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 8}, {4, 9}, {5, 3},
-                         {5, 6}, {6, 3}, {6, 8}};
-        Astar astar = new Astar(15, 7, 1, 1, 5, 4, walls);
-        astar.start();
-//        for (int[] i : walls) {
-//            System.out.println(i[0]+" "+ i[1]);
-//        }
-    }
     static int width;
     static int height;
     public Astar(int w, int h, int xStart, int yStart, int xEnd, int yEnd, int[][] wallPoint) {
@@ -79,15 +68,15 @@ public class Astar {
         showMap();
     }
 
-    public void showMap(){
+    public void showMap() {
         System.out.println("start: " + startCell.x + " " + startCell.y);
         System.out.println("end: " + endCell.x + " " + endCell.y);
-        for(int i = 0 ; i < height; i++){
-            for(int j = 0; j < width; j++){
-                if (matrix[i][j]!=null) {
-                    if (matrix[i][j].x == endCell.x && matrix[i][j].y == endCell.y){
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (matrix[i][j] != null) {
+                    if (matrix[i][j].x == endCell.x && matrix[i][j].y == endCell.y) {
                         System.out.print("E ");
-                    } else if(matrix[i][j].x == startCell.x && matrix[i][j].y == startCell.y) {
+                    } else if (matrix[i][j].x == startCell.x && matrix[i][j].y == startCell.y) {
                         System.out.print("S ");
                     } else {
                         System.out.print(matrix[i][j].value + " ");
@@ -99,7 +88,6 @@ public class Astar {
             System.out.println();
         }
     }
-
     public void start() {
         if(matrix==null) return;
         // clean

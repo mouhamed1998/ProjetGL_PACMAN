@@ -14,7 +14,7 @@ public class Pacman extends MovableEntity {
 
 
     public MovementType nextDirection;
-    public double speed =2;
+    public double speed =3;
 
     public int life =3;
     private JPanel jPanel;
