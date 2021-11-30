@@ -1,10 +1,9 @@
-package AI;
+package Engine.AI;
 
 
 
 import Engine.Graphics.Map;
 import Engine.physics.Collision.CollisionMap;
-import Engine.physics.Collision.CollisionRectangle;
 import Engine.physics.movement.MovementType;
 import Pacman.Ghost;
 import Pacman.Wall;
@@ -26,12 +25,12 @@ public class RandomMovement implements AiInterface{
     }
 
     @Override
-    public MovementType getMovement(Ghost ghost, JPanel jpanel) {
+    public MovementType getMovement(Ghost ghost, Map map) {
         this.ghost = ghost;
         //Random random =  new Random();
        // return  MovementType.values()[random.nextInt(MovementType.values().length)];
 
-        this.jlabel = jpanel;
+        this.jlabel = map;
         this.ghost = ghost;
         MovementType nextMove = MovementType.STOP;
 

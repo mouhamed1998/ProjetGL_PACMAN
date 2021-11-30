@@ -1,6 +1,9 @@
 package Engine.Graphics;
 
 
+import Engine.AI.AiInterface;
+import Engine.AI.AstarAI;
+import Engine.AI.RandomMovement;
 import Engine.physics.Collision.CollisionCircle;
 import Engine.physics.Collision.CollisionMap;
 import Engine.physics.Collision.CollisionRectangle;
@@ -34,6 +37,7 @@ public class Map extends JPanel {
     public int score = 0;
     public int life =0;
     private boolean isfirest;
+
     public int getScore(){
         return score;
     }
@@ -81,6 +85,10 @@ public class Map extends JPanel {
         return jlabelLife;
     }
 
+    public MapNew getMapNew() {
+        return mapNew;
+    }
+
     void initEntity(){
         foods = new ArrayList<>();
         pufoods = new ArrayList<>();
@@ -119,7 +127,37 @@ public class Map extends JPanel {
         jlabelLife.setLocation(new Point(24*30 +10,11*30 +10));
         initImage();
         initEntity();
+        setAIForGhost();
 
+
+    }
+    public void setAIForGhost(){
+        //ghosts.get(0).AI = new AstarAI();
+        /*
+        for (Ghost ghost : ghosts){
+            ghost.AI = new AstarAI();
+        }
+
+         */
+        /*
+        for (int i = 0; i<ghosts.size(); i++){
+            if(i==3||i==1||i==2) ghosts.get(i).AI = new AstarAI();
+            else this.ghosts.get(i).AI = new RandomMovement();
+        }
+
+         */
+
+    }
+    public int[][] getWallsPosition() {
+        int[][] walls = new int[mapNew.getWallPositions().size()][2];
+        int i = 0;
+        for (Point point:mapNew.getWallPositions()){
+            walls[i] = new int[]{
+                    point.y, point.x
+            };
+            i+=1;
+        }
+        return walls;
     }
 
 
@@ -218,7 +256,6 @@ public class Map extends JPanel {
         for (Wall wall : walls) {
             g.drawImage(wall.getImage(), wall.getPixelPosition().x, wall.getPixelPosition().y, null);
         }
-
         int xPacman = pacman.getPixelPosition().x;
         int yPacman = pacman.getPixelPosition().y;
         g.drawImage(pacman.getImage(), xPacman, yPacman, null);
@@ -267,6 +304,7 @@ public class Map extends JPanel {
 
             }
         }
+
         jlabelScore.setForeground(Color.yellow);
         jlabelLife.setForeground(Color.yellow);
         jlabelScore.setLocation(new Point(30,11*30 +10));
@@ -299,13 +337,15 @@ public class Map extends JPanel {
         }
 
          */
-
-        for (Ghost ghost: realGhosts){
-            ghost.verifyNextDirection(walls);
-            ghost.move();
+        AstarAI astarAI = new AstarAI();
+        for(Ghost ghost :ghosts){
+            System.out.println("Astar"+astarAI.getMovement(ghost, this));
         }
 
-
+        for (Ghost ghost: realGhosts){
+            ghost.nextMoveCalculateByAI(this);
+            ghost.move();
+        }
         /*
         for (Entity entity :entities){
             BufferedImage myPicture = null;

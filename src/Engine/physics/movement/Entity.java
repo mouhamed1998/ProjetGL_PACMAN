@@ -9,9 +9,10 @@ public abstract class Entity {
     private Point PixelPosition;
     private Image image;
     private String path;
-    private String systemPath = System.getProperty("user.dir");
+    //private String systemPath = System.getProperty("user.dir");
     private JPanel jPanel;
     private static int size = 30;
+    private Point pixelPosition;
 
 
     public void SetImage(Image image){
@@ -20,9 +21,8 @@ public abstract class Entity {
     public URL getURLPath(String path){
         return this.getPath().getClass().getResource(path);
     }
-    public Point getCurrentPosition(){
-        return new Point(0,0);
-    }
+    public abstract Point getCurrentPosition();
+
     public void setPosition(Point position) {
         this.position = position;
     }

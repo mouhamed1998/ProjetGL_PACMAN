@@ -1,24 +1,23 @@
 package Pacman;
 
-import AI.AiInterface;
-import AI.RandomMovement;
+import Engine.AI.AiInterface;
+import Engine.AI.AstarAI;
+import Engine.AI.RandomMovement;
 import Engine.Graphics.Map;
 import Engine.physics.Collision.CollisionMap;
 import Engine.physics.movement.Entity;
 import Engine.physics.movement.MovableEntity;
 import Engine.physics.movement.MovementType;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.jar.JarEntry;
+import java.util.Random;
 
 public class Ghost extends MovableEntity {
-    public RandomMovement AI;;
+    //public RandomMovement AI;
+    public AstarAI AI;
+    //import AI.RandomMovement;
     private int number;
     public MovementType nextDirection;
     private double speed = 1;
@@ -86,6 +85,11 @@ public class Ghost extends MovableEntity {
         }
         return null;
     }
+
+    public AiInterface getAI() {
+        return AI;
+    }
+
     public Image getImage() {
         switch (number){
             case 1:{
@@ -139,9 +143,9 @@ public class Ghost extends MovableEntity {
             }
         }
 
-        AI =new RandomMovement();
+        AI =new AstarAI();
         this.map = map;
-        nextMoveCalculateByAI(this.map);
+        //nextMoveCalculateByAI(this.map);
         this.setPosition(ghost.getPosition());
         this.setPixelPosition(new Point(ghost.getPosition().x*30+10, ghost.getPosition().y*30+10));
         this.setGameBoard(map);
@@ -159,10 +163,16 @@ public class Ghost extends MovableEntity {
          */
 
     }
-    public void nextMoveCalculateByAI(JPanel jPanel){
-        MovementType movementType = this.AI.getMovement(this, jPanel);
+    public void nextMoveCalculateByAI(Map map){
+        MovementType movementType = this.AI.getMovement(this, map);
         //System.out.println("movement: " + movementType);
         this.setDirection(movementType);
+    }
+    public Point getCurrentPosition() {
+        System.out.println(getPixelPosition());
+        int size=30;
+        if((this.getPixelPosition().x-10)%size!=0||(this.getPixelPosition().y-10)%size!=0) return null;
+        else return new Point((this.getPixelPosition().x-10)/size, (this.getPixelPosition().y-10)/size);
     }
 
     public Boolean canMove() {
@@ -187,7 +197,7 @@ public class Ghost extends MovableEntity {
 
     @Override
     public void move() {
-
+        /*
         CollisionMap collisionMap = new CollisionMap();
         for (Entity entity : Map.walls){
             if(entity instanceof Wall){
@@ -198,6 +208,9 @@ public class Ghost extends MovableEntity {
                 }
             }
         }
+
+         */
+
         switch (this.getDirection()) {
             case UP:
                 this.getPixelPosition().y -= speed;
@@ -220,10 +233,11 @@ public class Ghost extends MovableEntity {
                 //this.map.repaint();
                 break;
             default:
-                nextMoveCalculateByAI(this.map);
-                move();
+                //nextMoveCalculateByAI(this.map);
+                //move();
                 break;
         }
+
     }
 
     @Override

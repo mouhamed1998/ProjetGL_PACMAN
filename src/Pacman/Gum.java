@@ -22,6 +22,12 @@ public class Gum extends Entity {
     public Image getImage(){
         return image;
     }
+
+    @Override
+    public Point getCurrentPosition() {
+        return null;
+    }
+
     public  void setImage(Image image){
         this.image = image;
     }

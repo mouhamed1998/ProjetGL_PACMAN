@@ -12,13 +12,14 @@ import java.util.ArrayList;
 
 public class Pacman extends MovableEntity {
 
-    private Image  normalImage, upImage, downImage, leftImage,rightImage,image;
+
     public MovementType nextDirection;
-    public double speed =1;
+    public double speed =2;
 
     public int life =3;
     private JPanel jPanel;
     String url;
+    private Image  normalImage, upImage, downImage, leftImage,rightImage,image;
     public Pacman(Point position, JPanel jPanel){
         this.jPanel = jPanel;
         nextDirection = MovementType.STOP;

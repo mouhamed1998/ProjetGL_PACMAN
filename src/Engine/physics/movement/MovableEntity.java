@@ -1,11 +1,53 @@
 package Engine.physics.movement;
 
 import Engine.physics.Collision.CollisionMap;
+import Pacman.Pacman;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Map;
-
 public class MovableEntity extends Entity implements Movement{
+    private Image normalImage, upImage, downImage, leftImage,rightImage,image;
+    private Point pixelPosition;
+
+    //MovableEntity pacman = new Pacman();
+    public Image getNormalImage() {
+        return normalImage;
+    }
+
+    public Image getUpImage() {
+        return upImage;
+    }
+
+    public Image getDownImage() {
+        return downImage;
+    }
+
+    public Image getLeftImage() {
+        return leftImage;
+    }
+
+    public Image getRightImage() {
+        return rightImage;
+    }
+
+    @Override
+    public Point getCurrentPosition() {
+        System.out.println(getPixelPosition());
+        int size=30;
+        if((this.pixelPosition.x-10)%size!=0||(this.pixelPosition.y-10)%size!=0) return null;
+        else return new Point((this.pixelPosition.x-10)/size, (this.pixelPosition.y-10)/size);
+    }
+
+    @Override
+    public Image getImage() {
+        return image;
+    }
+
+    public CollisionMap getCollisionMap() {
+        return collisionMap;
+    }
+
     public MovementType direction = MovementType.STOP;
     int speed=1;
     public int getSpeed() {
@@ -30,75 +72,6 @@ public class MovableEntity extends Entity implements Movement{
     public void setMap(JPanel map){
         this.map = map;
     }
-    /*
-    public  void moveUp(){
-        System.out.println("UP");
-        for (Entity wall : Map.entities){
-            if(wall instanceof Wall){
-                System.out.println("upmmmmmmm");
-                collisionMap.CollisionUPWithWall(this, wall);
-            }
-
-        }
-        if(this.direction == MovementType.UP){
-            int y = this.getPixelPosition().y - this.getSpeed();
-            //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
-            this.setPixelPosition(new Point(this.getPixelPosition().x, y));
-        }
-
-    }
-    public  void moveDown(){
-
-        System.out.println("DOWN");
-        for (Entity wall : Map.entities){
-            if(wall instanceof Wall){
-                collisionMap.CollisionDOWNWithWall(this, wall);
-
-            }
-        }
-
-        if(this.direction == MovementType.DOWN){
-            int y = this.getPixelPosition().y + this.getSpeed();
-            //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
-            this.setPixelPosition(new Point(this.getPixelPosition().x, y));
-        }
-
-
-    }
-    public void moveLeft(){
-
-        System.out.println("LEFT");
-        for (Entity wall : Map.entities){
-            if(wall instanceof Wall){
-                System.out.println("instance");
-                collisionMap.CollisionLEFTWithWall(this, wall);
-
-            }
-        }
-        if(this.direction == MovementType.LEFT){
-            int x = this.getPixelPosition().x - this.getSpeed();
-            //pacman.setPosition(new Point(x, pacman.getPixelPosition().y));
-            this.setPixelPosition(new Point(x, this.getPixelPosition().y));
-        }
-    }
-    public void moveRight(){
-        System.out.println("RIGHT");
-        for (Entity wall : Map.entities){
-            if(wall instanceof Wall){
-                System.out.println("instance");
-                collisionMap.CollisionRIGHTWithWall(this, wall);
-
-            }
-        }
-
-        if(this.direction == MovementType.RIGHT){
-            int x = this.getPixelPosition().x + this.getSpeed();
-            //pacman.setPosition(new Point(x, pacman.getPixelPosition().y));
-            this.setPixelPosition(new Point(x, this.getPixelPosition().y));
-        }
-    }
-
-     */
 
     public void move() {
 
@@ -122,83 +95,7 @@ public class MovableEntity extends Entity implements Movement{
             default:
                 break;
         }
-        /*
-       switch (this.getDirection()){
-            case UP: {
-                this.goUp();
-                System.out.println("UP");
-                for (Entity wall : Map.entities){
-                    if(wall instanceof Wall){
-                        collisionMap.collisionWithWall(this, (Wall) wall);
-                        System.out.println("collision wall-entity");
-                    }
 
-                }
-                this.setDirection(MovementType.STOP);
-                if(this.direction == MovementType.UP){
-                    int y = this.getPixelPosition().y - this.getSpeed();
-                    //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
-                    this.setPixelPosition(new Point(this.getPixelPosition().x, y));
-                }
-            }
-            case DOWN :{
-                System.out.println("DOWN");
-                this.goDown();
-                for (Entity wall : Map.entities){
-                    if(wall instanceof Wall){
-                        collisionMap.collisionWithWall(this, (Wall) wall);
-                        System.out.println("collision wall-entity");
-                    }
-
-                }
-                this.setDirection(MovementType.STOP);
-
-
-                int y = this.getPixelPosition().y + this.getSpeed();
-
-
-                //pacman.setPosition(new Point(pacman.getPixelPosition().x, y));
-                this.setPixelPosition(new Point(this.getPixelPosition().x, y));
-
-
-            }
-            case LEFT :{
-                System.out.println("LEFT");
-                this.goLeft();
-                for (Entity wall : Map.entities){
-                    if(wall instanceof Wall){
-                        collisionMap.collisionWithWall(this, (Wall) wall);
-                        System.out.println("collision wall-entity");
-                    }
-
-                }
-                this.setDirection(MovementType.STOP);
-
-                int x = this.getPixelPosition().x - this.getSpeed();
-                //pacman.setPosition(new Point(x, pacman.getPixelPosition().y));
-                this.setPixelPosition(new Point(x, this.getPixelPosition().y));
-
-            }
-            case RIGHT :{
-                System.out.println("RIGHT");
-                this.goRight();
-                for (Entity wall : Map.entities){
-                    if(wall instanceof Wall){
-                        collisionMap.collisionWithWall(this, (Wall) wall);
-                        System.out.println("collision wall-entity");
-                    }
-
-                }
-                this.setDirection(MovementType.STOP);
-
-                int x = this.getPixelPosition().x + this.getSpeed();
-                //pacman.setPosition(new Point(x, pacman.getPixelPosition().y));
-                this.setPixelPosition(new Point(x, this.getPixelPosition().y));
-
-                //this.pacman.move();
-            }
-
-         */
         }
 
     @Override
