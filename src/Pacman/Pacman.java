@@ -4,16 +4,17 @@ import Engine.physics.Collision.CollisionMap;
 import Engine.physics.movement.ImmovableEntity;
 import Engine.physics.movement.MovableEntity;
 import Engine.physics.movement.MovementType;
+import Engine.physics.movement.PlayerEntity;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Pacman extends MovableEntity {
+public class Pacman extends PlayerEntity {
 
     private Image  normalImage, upImage, downImage, leftImage,rightImage,image;
     public MovementType nextDirection;
-    public int speed =5;
+    public int speed =1;
     private JPanel jPanel;
     String url;
     public Pacman(Point position, JPanel jPanel){
@@ -21,8 +22,7 @@ public class Pacman extends MovableEntity {
     }
 
     public Pacman(Point position) {
-        this.setPosition(position);
-        this.setPixelPosition(new Point(position.x*getSize()+10 ,position.y*getSize()+10));
+        super(position);
     }
 
 
@@ -130,11 +130,12 @@ public class Pacman extends MovableEntity {
     }
 
     public Pacman() {
+        super();
     }
 
     public void verifyNextDirection(ArrayList<ImmovableEntity> walls) {
         if (nextDirection == MovementType.STOP) return;
-        Pacman newPacman = new Pacman();
+        PlayerEntity newPacman = new Pacman();
         newPacman.setDirection(this.nextDirection);
         newPacman.setPixelPosition(this.getPixelPosition());
         CollisionMap collision = new CollisionMap();

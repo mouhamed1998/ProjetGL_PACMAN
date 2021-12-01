@@ -1,5 +1,6 @@
 package Engine.physics.movement;
 
+import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
@@ -10,6 +11,7 @@ public abstract class Entity {
     private String path;
     private String systemPath = System.getProperty("user.dir");
     private static int size = 30;
+    private JPanel jPanel;
 
 
     public void SetImage(Image image){
@@ -33,6 +35,8 @@ public abstract class Entity {
         this.image = image;
     }
 
+
+
     public void setPath(String path) {
         this.path = path;
     }
@@ -52,7 +56,9 @@ public abstract class Entity {
     public Image getImage() {
         return image;
     }
-
+    public void setGameBoard(JPanel jPanel){
+        this.jPanel = jPanel;
+    }
     public String getPath() {
         return path;
     }

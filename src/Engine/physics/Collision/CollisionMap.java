@@ -3,6 +3,7 @@ package Engine.physics.Collision;
 import Engine.physics.movement.ImmovableEntity;
 import Engine.physics.movement.MovableEntity;
 import Engine.physics.movement.MovementType;
+import Engine.physics.movement.PlayerEntity;
 import Pacman.Pacman;
 import Pacman.Wall;
 
@@ -15,7 +16,7 @@ public class CollisionMap implements CollisionWall{
      * @param wall wal in map
      */
     @Override
-    public void collisionWithWall(MovableEntity movableEntity, ImmovableEntity wall) {
+    public void collisionWithWall(PlayerEntity movableEntity, ImmovableEntity wall) {
         MovementType direction = movableEntity.getDirection();
         int movableX = movableEntity.getPixelPosition().x;
         int movableY = movableEntity.getPixelPosition().y;
@@ -83,7 +84,7 @@ public class CollisionMap implements CollisionWall{
     }
 
     @Override
-    public boolean isCollisionWithWall(MovableEntity movableEntity, ImmovableEntity wall) {
+    public boolean isCollisionWithWall(PlayerEntity movableEntity, ImmovableEntity wall) {
         MovementType direction = movableEntity.getDirection();
         int movableX = movableEntity.getPosition().x;
         int movableY = movableEntity.getPosition().y;
