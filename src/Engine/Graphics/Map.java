@@ -1,6 +1,9 @@
 package Engine.Graphics;
 
-
+/*
+import Engine.AI.AiInterface;
+import Engine.AI.AstarAI;
+import Engine.AI.RandomMovement;
 import Engine.physics.Collision.CollisionCircle;
 import Engine.physics.Collision.CollisionMap;
 import Engine.physics.Collision.CollisionRectangle;
@@ -32,8 +35,9 @@ public class Map extends JPanel {
     private JLabel jlabelScore;
     private JLabel jlabelLife;
     public int score = 0;
-    public int life =3;
+    public int life =0;
     private boolean isfirest;
+
     public int getScore(){
         return score;
     }
@@ -81,6 +85,10 @@ public class Map extends JPanel {
         return jlabelLife;
     }
 
+    public MapNew getMapNew() {
+        return mapNew;
+    }
+
     void initEntity(){
         foods = new ArrayList<>();
         pufoods = new ArrayList<>();
@@ -119,7 +127,37 @@ public class Map extends JPanel {
         jlabelLife.setLocation(new Point(24*30 +10,11*30 +10));
         initImage();
         initEntity();
+        setAIForGhost();
 
+
+    }
+    public void setAIForGhost(){
+        //ghosts.get(0).AI = new AstarAI();
+        /*
+        for (Ghost ghost : ghosts){
+            ghost.AI = new AstarAI();
+        }
+
+         */
+        /*
+        for (int i = 0; i<ghosts.size(); i++){
+            if(i==3||i==1||i==2) ghosts.get(i).AI = new AstarAI();
+            else this.ghosts.get(i).AI = new RandomMovement();
+        }
+
+         */
+/*
+    }
+    public int[][] getWallsPosition() {
+        int[][] walls = new int[mapNew.getWallPositions().size()][2];
+        int i = 0;
+        for (Point point:mapNew.getWallPositions()){
+            walls[i] = new int[]{
+                    point.y, point.x
+            };
+            i+=1;
+        }
+        return walls;
     }
 
 
@@ -200,6 +238,7 @@ public class Map extends JPanel {
     }
 
      */
+/*
     CollisionMap collisionMap = new CollisionMap();
     public ArrayList<Entity> getEntities() {
         return entities;
@@ -218,12 +257,6 @@ public class Map extends JPanel {
         for (Wall wall : walls) {
             g.drawImage(wall.getImage(), wall.getPixelPosition().x, wall.getPixelPosition().y, null);
         }
-        for(Ghost gh : realGhosts) {
-            Image ghostImage = gh.getImage();
-            int xGhost = gh.getPixelPosition().x;
-            int yGhost = gh.getPixelPosition().y;
-            g.drawImage(ghostImage, xGhost, yGhost, null);
-        }
         int xPacman = pacman.getPixelPosition().x;
         int yPacman = pacman.getPixelPosition().y;
         g.drawImage(pacman.getImage(), xPacman, yPacman, null);
@@ -239,6 +272,12 @@ public class Map extends JPanel {
             int x = f.getPixelPosition().x;
             int y = f.getPixelPosition().y;
             g.drawImage(f.getImage(), x, y,null);
+        }
+        for(Ghost gh : realGhosts) {
+            Image ghostImage = gh.getImage();
+            int xGhost = gh.getPixelPosition().x;
+            int yGhost = gh.getPixelPosition().y;
+            g.drawImage(ghostImage, xGhost, yGhost, null);
         }
         for(Gum gum: pufoods){
             if(collisionCircle.isCollision(pacman, gum)){
@@ -257,7 +296,6 @@ public class Map extends JPanel {
                 break;
             }
         }
-
         for(Ghost ghost : realGhosts){
             if(collisionRectangle.isCollision(pacman,ghost)){
                 realGhosts.remove(ghost);
@@ -267,6 +305,7 @@ public class Map extends JPanel {
 
             }
         }
+
         jlabelScore.setForeground(Color.yellow);
         jlabelLife.setForeground(Color.yellow);
         jlabelScore.setLocation(new Point(30,11*30 +10));
@@ -274,6 +313,20 @@ public class Map extends JPanel {
         Font font = new Font("Arial",Font.BOLD , 20);
         jlabelLife.setFont(font);
         jlabelScore.setFont(font);
+        Object panel;
+        //JOptionPane jOptionPane = new JOptionPane(this, JOptionPane.PLAIN_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
+        //jOptionPane.createDialog(this,"Game Over");
+
+        if(life <0){
+
+            int result = JOptionPane.showConfirmDialog(null, "You lose GAME OVER","QUIT", JOptionPane.YES_NO_OPTION);
+            if(result == JOptionPane.YES_OPTION){
+                System.exit(0);
+            }
+
+            //}
+        }
+        /*
         for(Ghost ghost : realGhosts){
             ghost.move();
 
@@ -285,14 +338,16 @@ public class Map extends JPanel {
         }
 
          */
-        /*
-        for (Ghost ghost: realGhosts){
-            ghost.verifyNextDirection(walls);
-            ghost.move();
+/*
+        AstarAI astarAI = new AstarAI();
+        for(Ghost ghost :ghosts){
+            System.out.println("Astar"+astarAI.getMovement(ghost, this));
         }
 
-         */
-
+        for (Ghost ghost: realGhosts){
+            ghost.nextMoveCalculateByAI(this);
+            ghost.move();
+        }
         /*
         for (Entity entity :entities){
             BufferedImage myPicture = null;
@@ -320,12 +375,14 @@ public class Map extends JPanel {
 
          */
 
-
+/*
         for (Wall wall :walls){
             collisionMap.collisionWithWall(pacman,wall);
         }
         pacman.verifyNextDirection(walls);
         pacman.move();
+        /*
+        setVisible(true);
         /*
         for (Entity entity : entities){
             collisionMap.CollisionWithWall(pacman, entity);
@@ -333,5 +390,11 @@ public class Map extends JPanel {
 
          */
 
+    /*}
+    public int getLife() {
+        return life;
     }
 }
+
+
+     */
