@@ -1,14 +1,9 @@
 package Engine.Input;
 
-import Engine.Graphics.Map;
-import Engine.physics.Collision.CollisionMap;
-import Engine.physics.movement.Entity;
-import Engine.physics.movement.MovableEntity;
-import Engine.physics.movement.MovementType;
-import Pacman.Pacman;
-import Pacman.Wall;
 
-import java.awt.*;
+import Engine.physics.Collision.CollisionMap;
+import GamePlay.Pacman.Pacman;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -85,7 +80,9 @@ public class KeyBorad extends KeyAdapter implements KeyListener {
             }
             this.pacman.move();
 
-            //this.pacman.goRight();
+
+
+                       //this.pacman.goRight();
 
              */
         }

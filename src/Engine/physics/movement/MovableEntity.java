@@ -1,11 +1,10 @@
 package Engine.physics.movement;
 
 import Engine.physics.Collision.CollisionMap;
-import Pacman.Pacman;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Map;
+
 public class MovableEntity extends Entity implements Movement{
     private Image normalImage, upImage, downImage, leftImage,rightImage,image;
     private Point pixelPosition;
@@ -64,6 +63,17 @@ public class MovableEntity extends Entity implements Movement{
     public String getUrls() {
         return null;
     }
+
+    @Override
+    public void setSpeed(int i) {
+
+    }
+
+    @Override
+    public int getNumber() {
+        return 0;
+    }
+
     CollisionMap collisionMap = new CollisionMap();
     public JPanel getMap(){
         return map;

@@ -1,4 +1,4 @@
-package App;
+package Engine.kernel;
 
 
 import Engine.AI.AstarAI;
@@ -6,21 +6,25 @@ import Engine.AI.RandomMovement;
 import Engine.physics.Collision.CollisionCircle;
 import Engine.physics.Collision.CollisionMap;
 import Engine.physics.Collision.CollisionRectangle;
-import Pacman.Ghost;
-import Pacman.Gum;
-import Pacman.Pacman;
-import Pacman.Wall;
+import GameAudio.GameAudioPlayer;
+import GamePlay.Pacman.Ghost;
+import GamePlay.Pacman.Gum;
+import GamePlay.Pacman.Pacman;
+import GamePlay.Pacman.Wall;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Graphics;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 enum GameState{
     PLAY, PAUSE, STOP, GAMEOVER, VICTORY
 }
 
-public class CoreKernel {
+public class Kernel {
     public Pacman pacman;
     //public CopyOnWriteArrayList<Ghost> ghosts;
     public ArrayList<Ghost> ghosts;
@@ -34,12 +38,17 @@ public class CoreKernel {
     public CollisionRectangle collisionRectangle = new CollisionRectangle();
     public Graphics coreGraphic;
     public int score = 0;
+    private int life = 3;
+    final GameAudioPlayer coinEat = new GameAudioPlayer("GameAudio/coin_eat.wav");
+    //public GameAudioPlayer gameAudioPlayer = new GameAudioPlayer("GameAudio/Sonnerie-Game-of-Thrones.wav");
 
-    public CoreKernel(){
+
+    public Kernel() throws FileNotFoundException, MalformedURLException, URISyntaxException {
 
     }
     int i = 0;
     public void takeAnimation() {
+        //gameAudioPlayer.start();
         if(gameState==GameState.VICTORY) {
             victoryPush();
         }
@@ -49,60 +58,73 @@ public class CoreKernel {
         pacman.verifyNextDirection(this.walls);
         pacman.move();
         for(Ghost ghost : ghosts) {
-
-            //ghost.setDirection(MovementType.LEFT);
-            //ghost.nextMoveCalculateByAI(this);
+            ghost.nextMoveCalculateByAI(this);
             ghost.move();
         }
         for(Ghost ghost: ghosts){
+            System.out.println("ghost.getDirection()"+ ghost.getDirection());
             if(collisionRectangle.isCollision(pacman, ghost)){
-                ghostCatchPacman();
+                life --;
+                if(life >=0){
+                    ghosts.remove(ghost);
+                }
+                else ghostCatchPacman();
+                break;
             }
-        }
 
+        }
         //eat coin
         for (Gum coin:coins) {
             if(collisionCircle.isCollision(pacman, coin)) {
-                //coinEat.start();
+                coinEat.start();
                 coins.remove(coin);
                 score += 10;
                 break;
+
             }
-            if(coins.isEmpty()) {
-                gameState = GameState.VICTORY;
-            }
+
         }
 
         for (Gum coin: pufoods) {
             if(collisionCircle.isCollision(pacman, coin)) {
-                //coinEat.start();
+                coinEat.start();
                 pufoods.remove(coin);
                 score += 30;
                 break;
             }
         }
+        if(pufoods.isEmpty()) {
+            gameState = GameState.VICTORY;
+            victoryPush();
+
+        }
+
 
     }
 
     public void setAIForGhost(){
         //ghosts.get(0).AI = new AstarAI();
         for (int i = 0; i<ghosts.size(); i++){
-            if(i==3||i==1) ghosts.get(i).AI = new AstarAI();
+            if(i==3||i==1 || i==2) ghosts.get(i).AI = new AstarAI();
             else this.ghosts.get(i).AI = new RandomMovement();
         }
     }
 
     public void ghostCatchPacman(){
-        gameState = GameState.GAMEOVER;
-        int  result = JOptionPane.showConfirmDialog(null, "You lose, GAME OVER",
-                "Quit", JOptionPane.YES_OPTION);
-        if(result == JOptionPane.YES_OPTION) {
-            System.exit(0);
+        if(life <0){
+            //gameAudioPlayer.stop();
+            gameState = GameState.GAMEOVER;
+            int  result = JOptionPane.showConfirmDialog(null, "You lose, GAME OVER",
+                    "Quit", JOptionPane.YES_OPTION);
+            if(result == JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
         }
+        return;
     }
 
     void victoryPush(){
-
+        //gameAudioPlayer.stop();
         JOptionPane.showMessageDialog(null, "You are victory");
     }
 
@@ -122,5 +144,9 @@ public class CoreKernel {
             i+=1;
         }
         return walls;
+    }
+
+    public int getLife() {
+        return life;
     }
 }

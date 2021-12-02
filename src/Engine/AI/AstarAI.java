@@ -1,27 +1,22 @@
 package Engine.AI;
 
-import Engine.Graphics.Map;
+import Engine.kernel.Kernel;
 import Engine.physics.movement.MovementType;
-import Pacman.Ghost;
+import GamePlay.Pacman.Ghost;
 
-
-import javax.swing.*;
 import java.awt.*;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class AstarAI implements AiInterface{
     @Override
-    public MovementType getMovement(Ghost ghost, Map map) {
-        Point pacmanPixel = map.pacman.getPixelPosition();
-        Point pacman = new Point((pacmanPixel.x-10)/map.pacman.getSize(), (pacmanPixel.y-10)/map.pacman.getSize());
+    public MovementType getMovement(Ghost ghost, Kernel kernel) {
+        Point pacmanPixel = kernel.pacman.getPixelPosition();
+        Point pacman = new Point((pacmanPixel.x-10)/kernel.pacman.getSize(), (pacmanPixel.y-10)/kernel.pacman.getSize());
         Point ghostPoint = ghost.getCurrentPosition();
         if(ghostPoint!=null) {
             System.out.println("=========================================");
-//        for (int[] x : coreKernel.getWallsPosition()) {
-//            System.out.println(x[0] + " " + x[1]);
-//        }
-            Astar ai = new Astar(27, 24, ghostPoint.y, ghostPoint.x, pacman.y, pacman.x, map.getWallsPosition());
+            Astar ai = new Astar(27, 24, ghostPoint.y, ghostPoint.x, pacman.y, pacman.x, kernel.getWallsPosition());
             ai.start();
             Stack<Point> solution = ai.getSolution();
             try {

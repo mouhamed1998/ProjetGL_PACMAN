@@ -1,10 +1,12 @@
-package Engine.Graphics;
+package GamePlay;
 
-import javax.swing.*;
+import GamePlay.MazeWindow;
+
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, URISyntaxException {
         MazeWindow mazeWindow = new MazeWindow();
 
         /*

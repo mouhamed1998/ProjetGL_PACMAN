@@ -1,4 +1,4 @@
-package Pacman;
+package GamePlay.Pacman;
 
 import Engine.physics.movement.Entity;
 
@@ -19,6 +19,17 @@ public class Gum extends Entity {
     public String getUrls() {
         return "src/API/ressource/pacman_img/big_gum.png";
     }
+
+    @Override
+    public void setSpeed(int i) {
+
+    }
+
+    @Override
+    public int getNumber() {
+        return 0;
+    }
+
     public Image getImage(){
         return image;
     }

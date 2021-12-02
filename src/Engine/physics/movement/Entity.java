@@ -1,6 +1,8 @@
 package Engine.physics.movement;
 
-import javax.swing.*;
+import GamePlay.MapNew;
+import GamePlay.GameGraphic;
+
 import java.awt.*;
 import java.net.URL;
 
@@ -10,7 +12,7 @@ public abstract class Entity {
     private Image image;
     private String path;
     //private String systemPath = System.getProperty("user.dir");
-    private JPanel jPanel;
+    private MapNew mapNew;
     private static int size = 30;
     private Point pixelPosition;
 
@@ -34,8 +36,8 @@ public abstract class Entity {
     public void setImage(Image image) {
         this.image = image;
     }
-    public void setGameBoard(JPanel jPanel) {
-        this.jPanel = jPanel;
+    public void setGameBoard(GameGraphic gameGraphic) {
+        this.mapNew = this.mapNew;
     }
 
     public void setPath(String path) {
@@ -73,4 +75,8 @@ public abstract class Entity {
     }
 
     public abstract String getUrls();
+
+    public abstract void setSpeed(int i);
+
+    public abstract int getNumber();
 }

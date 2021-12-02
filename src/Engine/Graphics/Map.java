@@ -1,6 +1,6 @@
 package Engine.Graphics;
 
-
+/*
 import Engine.AI.AiInterface;
 import Engine.AI.AstarAI;
 import Engine.AI.RandomMovement;
@@ -146,7 +146,7 @@ public class Map extends JPanel {
         }
 
          */
-
+/*
     }
     public int[][] getWallsPosition() {
         int[][] walls = new int[mapNew.getWallPositions().size()][2];
@@ -238,6 +238,7 @@ public class Map extends JPanel {
     }
 
      */
+/*
     CollisionMap collisionMap = new CollisionMap();
     public ArrayList<Entity> getEntities() {
         return entities;
@@ -337,6 +338,7 @@ public class Map extends JPanel {
         }
 
          */
+/*
         AstarAI astarAI = new AstarAI();
         for(Ghost ghost :ghosts){
             System.out.println("Astar"+astarAI.getMovement(ghost, this));
@@ -373,7 +375,7 @@ public class Map extends JPanel {
 
          */
 
-
+/*
         for (Wall wall :walls){
             collisionMap.collisionWithWall(pacman,wall);
         }
@@ -388,9 +390,11 @@ public class Map extends JPanel {
 
          */
 
-    }
-
+    /*}
     public int getLife() {
         return life;
     }
 }
+
+
+     */

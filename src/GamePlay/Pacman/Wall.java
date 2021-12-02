@@ -1,8 +1,7 @@
-package Pacman;
+package GamePlay.Pacman;
 
 import Engine.physics.movement.Entity;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class Wall extends Entity {
@@ -12,7 +11,6 @@ public class Wall extends Entity {
         this.setPosition(position);
         this.setPixelPosition(new Point(position.x * getSize()+10,position.y*getSize()+10));
     }
-
     @Override
     public Point getCurrentPosition() {
         return null;
@@ -21,6 +19,16 @@ public class Wall extends Entity {
     @Override
     public String getUrls() {
         return "src/API/ressource/pacman_img/wall.jpeg";
+    }
+
+    @Override
+    public void setSpeed(int i) {
+
+    }
+
+    @Override
+    public int getNumber() {
+        return 0;
     }
     /*
     public Image getImage(){

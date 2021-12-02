@@ -1,13 +1,12 @@
-package Engine.Graphics;
+package GamePlay;
 
 
-import Pacman.Ghost;
+import GamePlay.Pacman.Ghost;
 
 import java.awt.Point;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 public class MapNew {
     private int[][] mapGraphic;
     private ArrayList<Point> coinPositions;
@@ -73,7 +72,6 @@ public class MapNew {
     }
 
     public void getMapFromResource(String relPath){
-        //System.out.println("path: "+ this.getClass().getClassLoader().getResource(relPath).getPath());
         BufferedReader reader;
         mapGraphic = new int[24][27];
         coinPositions = new ArrayList<>();

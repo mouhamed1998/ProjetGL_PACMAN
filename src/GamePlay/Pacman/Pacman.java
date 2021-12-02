@@ -1,8 +1,6 @@
-package Pacman;
+package GamePlay.Pacman;
 
-import Engine.Graphics.Map;
 import Engine.physics.Collision.CollisionMap;
-import Engine.physics.movement.Entity;
 import Engine.physics.movement.MovableEntity;
 import Engine.physics.movement.MovementType;
 
@@ -14,7 +12,7 @@ public class Pacman extends MovableEntity {
 
 
     public MovementType nextDirection;
-    public double speed =3;
+    public double speed =1;
 
     public int life =3;
     private JPanel jPanel;
@@ -205,6 +203,9 @@ public class Pacman extends MovableEntity {
     }
     public JPanel getMap(){
         return this.jPanel;
+    }
+    public void setSpeed(int speed){
+        this.speed= speed;
     }
 
 

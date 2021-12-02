@@ -1,18 +1,16 @@
-package Pacman;
+package GamePlay.Pacman;
 
+import Engine.kernel.Kernel;
 import Engine.AI.AiInterface;
 import Engine.AI.AstarAI;
-import Engine.AI.RandomMovement;
-import Engine.Graphics.Map;
 import Engine.physics.Collision.CollisionMap;
-import Engine.physics.movement.Entity;
 import Engine.physics.movement.MovableEntity;
 import Engine.physics.movement.MovementType;
+import GamePlay.GameGraphic;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Ghost extends MovableEntity {
     //public RandomMovement AI;
@@ -20,8 +18,8 @@ public class Ghost extends MovableEntity {
     //import AI.RandomMovement;
     private int number;
     public MovementType nextDirection;
-    private double speed = 3;
-    private Map map;
+    private double speed = 1;
+    private GameGraphic gameGraphic;
     //1 ---> Rouge;
 
     public int getNumber() {
@@ -114,9 +112,9 @@ public class Ghost extends MovableEntity {
         }
         return null;
     }
-    public Ghost(Ghost ghost, Map map){
+    public Ghost(Ghost ghost, GameGraphic gameGraphic){
         this.nextDirection = MovementType.LEFT;
-        this.direction = MovementType.LEFT;
+        this.direction = MovementType.STOP;
         this.number = ghost.getNumber();
         this.setPosition(ghost.getPosition());
         this.setPixelPosition(new Point(ghost.getPosition().x*this.getSize()+10 ,ghost.getPosition().y*this.getSize()+10));
@@ -144,27 +142,15 @@ public class Ghost extends MovableEntity {
         }
 
         AI =new AstarAI();
-        this.map = map;
+        this.gameGraphic = gameGraphic;
         //nextMoveCalculateByAI(this.map);
         this.setPosition(ghost.getPosition());
         this.setPixelPosition(new Point(ghost.getPosition().x*30+10, ghost.getPosition().y*30+10));
-        this.setGameBoard(map);
-        /*
-        try {
-            String path = System.getProperty("user.dir");
-            Image image = ImageIO.read(new File(path+ "/resources/Ghost/7.png"));
-            this.setImage(image);
-            //this.image = ImageIO.read(this.getClass().getResource("resources/Ghost/7.png"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-         */
+        this.setGameBoard(this.gameGraphic);
 
     }
-    public void nextMoveCalculateByAI(Map map){
-        MovementType movementType = this.AI.getMovement(this, map);
+    public void nextMoveCalculateByAI(Kernel kernel){
+        MovementType movementType = this.AI.getMovement(this, kernel);
         //System.out.println("movement: " + movementType);
         this.setDirection(movementType);
     }
@@ -180,7 +166,7 @@ public class Ghost extends MovableEntity {
     }
     public void verifyNextDirection(ArrayList<Wall> walls) {
         if (nextDirection == MovementType.STOP) return;
-        Ghost ghost = new Ghost(this, this.map);
+        Ghost ghost = new Ghost(this, this.gameGraphic);
         ghost.setDirection(this.nextDirection);
         ghost.setPixelPosition(this.getPixelPosition());
         CollisionMap collision = new CollisionMap();
@@ -197,40 +183,27 @@ public class Ghost extends MovableEntity {
 
     @Override
     public void move() {
-        /*
-        CollisionMap collisionMap = new CollisionMap();
-        for (Entity entity : Map.walls){
-            if(entity instanceof Wall){
-                if(collisionMap.iscollisionWithWall(this, (Wall) entity)){
-                    this.setDirection(MovementType.STOP);
-                    nextMoveCalculateByAI(this.map);
-                    move();
-                }
-            }
-        }
-
-         */
 
         switch (this.getDirection()) {
             case UP:
                 this.getPixelPosition().y -= speed;
-                this.map.getGraphics().drawImage(this.getImage(), getPixelPosition().x, getPixelPosition().y, null);
-                //this.map.repaint();
+                this.gameGraphic.getGraphics().drawImage(this.getImage(), getPixelPosition().x, getPixelPosition().y, null);
+                this.gameGraphic.repaint();
                 break;
             case DOWN:
                 this.getPixelPosition().y += speed;
-                this.map.getGraphics().drawImage(this.getImage(), getPixelPosition().x, getPixelPosition().y, null);
-                //this.map.repaint();
+                this.gameGraphic.getGraphics().drawImage(this.getImage(), getPixelPosition().x, getPixelPosition().y, null);
+                this.gameGraphic.repaint();
                 break;
             case LEFT:
                 this.getPixelPosition().x -= speed;
-                this.map.getGraphics().drawImage(this.getImage(), getPixelPosition().x, getPixelPosition().y, null);
-                //this.map.repaint();
+                this.gameGraphic.getGraphics().drawImage(this.getImage(), getPixelPosition().x, getPixelPosition().y, null);
+                this.gameGraphic.repaint();
                 break;
             case RIGHT:
                 this.getPixelPosition().x += speed;
-                this.map.getGraphics().drawImage(this.getImage(), getPixelPosition().x, getPixelPosition().y, null);
-                //this.map.repaint();
+                this.gameGraphic.getGraphics().drawImage(this.getImage(), getPixelPosition().x, getPixelPosition().y, null);
+                this.gameGraphic.repaint();
                 break;
             default:
                 //nextMoveCalculateByAI(this.map);
