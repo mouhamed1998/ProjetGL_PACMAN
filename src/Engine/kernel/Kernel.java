@@ -39,7 +39,7 @@ public class Kernel {
     public Graphics coreGraphic;
     public int score = 0;
     private int life = 3;
-    final GameAudioPlayer coinEat = new GameAudioPlayer("GameAudio/coin_eat.wav");
+    final GameAudioPlayer coinEat = new GameAudioPlayer("API/ressource/pacman_img/audio/coin_eat.wav");
     //public GameAudioPlayer gameAudioPlayer = new GameAudioPlayer("GameAudio/Sonnerie-Game-of-Thrones.wav");
 
 

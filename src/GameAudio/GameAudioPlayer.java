@@ -43,7 +43,7 @@ public class GameAudioPlayer implements AudioPlayer {
      */
 
     public void open(String path) throws FileNotFoundException {
-        System.out.println(this.getClass().getClassLoader().getResource("GameAudio/coin_eat.wav"));
+        System.out.println(this.getClass().getClassLoader().getResource("API/ressource/pacman_img/audio/coin_eat.wav"));
         URL url = this.getClass().getClassLoader().getResource(path);
         AudioInputStream audioInputStream = null;
         try {
