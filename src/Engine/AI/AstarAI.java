@@ -8,7 +8,18 @@ import java.awt.*;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
+/**
+ * Moteur IA
+ * la class AstarAI est la class qui permet de donner un déplacement aux fantomes suivant un algorithme d'intelligence artificielle
+ */
 public class AstarAI implements AiInterface{
+    /**
+     * la méthode getMovement() permet de donner à un fantome la capacité de suivre le pacman en se basant sur l'algorithme A* qui est
+     * un algorithme de recherche de chemin le plus court basé sur l'algorithme de Djikstra
+     * @param ghost represente un fantome
+     * @param kernel represente le noyau qui va donner l'ordre au fantome de bouger d'une certaine manière
+     * @return elle retourne le mouvement du fantome dans le labyrinthe
+     */
     @Override
     public MovementType getMovement(Ghost ghost, Kernel kernel) {
         Point pacmanPixel = kernel.pacman.getPixelPosition();
@@ -32,6 +43,13 @@ public class AstarAI implements AiInterface{
             return ghost.getDirection();
         }
     }
+
+    /**
+     * la méthode getNextMovement() permet de récupérer le prochain mouvement de l'entité
+     * @param start la position initiale du fantome
+     * @param next la prochaine position du fantome aprés le mouvement
+     * @return le prochain mouvement du fantome
+     */
     MovementType getNextMovement(Point start, Point next) {
         Point rotateStart = new Point(start.y, start.x);
         Point rotateNext = new Point(next.y, next.x);

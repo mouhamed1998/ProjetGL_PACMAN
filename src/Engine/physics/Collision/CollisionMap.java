@@ -6,11 +6,12 @@ import GamePlay.Pacman.Wall;
 
 public class CollisionMap implements CollisionWall{
     /**
-     * This function check when the movable entity collision with map, it will stop the movement.
-     * There are four type of movement must check: UP, DOWN, Left, Right. This class will check pacman or ghost
-     * should be stop or not when have a collision with wall
-     * @param movableEntity may be pacman or ghost
-     * @param wall wal in map
+     * cette méthode arrete le déplacement de l'entitée donnée en parametre lorsque cette entitée rencontre un mur
+     * (entre en collision avec un mur)
+     * il y a quatre tupe de mouvement a vérifier : UP, DOWN , LEFT, RIGHT.
+     *
+     * @param movableEntity represente l'entitée en mouvement (pacman où fantome)
+     * @param wall represente un mur dans le labyrinthe
      */
     @Override
     public void collisionWithWall(MovableEntity movableEntity, Wall wall) {

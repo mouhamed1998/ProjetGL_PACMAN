@@ -4,8 +4,17 @@ import Engine.physics.movement.Entity;
 
 import java.awt.*;
 
+/**
+ * cette class represente les murs, elle étend la class Entity qui fait réference
+ * aux entités du jeu
+ */
 public class Wall extends Entity {
     //private Image image;
+
+    /**
+     * constructeur de la class Gum qui permet de créer une instance wall, il prend en parametre une position
+     * @param position position du mur
+     */
     public Wall(Point position){
       //  this.image = new ImageIcon("src/API/ressource/pacman_img/wall.jpeg").getImage();
         this.setPosition(position);
@@ -30,13 +39,5 @@ public class Wall extends Entity {
     public int getNumber() {
         return 0;
     }
-    /*
-    public Image getImage(){
-        return image;
-    }
-    public  void setImage(Image image){
-        this.image = image;
-    }
 
-     */
 }

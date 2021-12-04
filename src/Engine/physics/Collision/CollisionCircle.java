@@ -2,6 +2,11 @@ package Engine.physics.Collision;
 
 import Engine.physics.movement.Entity;
 
+/**
+ * Moteur Physique
+ * la partie collision
+ * cette classe gère les collisions entre les entités cercle
+ */
 public class CollisionCircle implements CollisionEngine {
 
 

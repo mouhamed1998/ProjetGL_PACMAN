@@ -5,9 +5,9 @@ import Engine.physics.movement.Entity;
 public interface CollisionEngine {
 
     /**
-     * on peut considerer deuw types de collisions :
-     * Rectangle : entre gohost et Pacman
-     *Cercle: entre Pacman et Gum
+     * on peut considerer deux types de collisions :
+     * Rectangle : entre ghost et Pacman
+     * Cercle: entre Pacman et Gum
      */
 
     public boolean isOutOfMazeWindow(Entity e1, int mazeHeight, int mazeWidth);

@@ -8,6 +8,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Moteur Input-Output
+ * c'est cette class qui permet de faire la connexion entre les touches clavier et les déplacements du pacman
+ * pour cela elle implements l'interface KeyListener et étend la class abstraite KeyAdapter
+ */
 public class KeyBorad extends KeyAdapter implements KeyListener {
     Pacman pacman ;
     public KeyBorad(Pacman pacman) {
@@ -16,6 +21,11 @@ public class KeyBorad extends KeyAdapter implements KeyListener {
     }
 
 
+    /**
+     * la méthode keyPressed permet de déclencher l'evenement du déplacement de l'entité pacman
+     * lorsque une touche (fléche) est pressée par l'utilisateur
+     * @param event un keyEvent
+     */
     public void keyPressed(KeyEvent event){
         CollisionMap collisionMap = new CollisionMap();
         int key = event.getKeyCode();

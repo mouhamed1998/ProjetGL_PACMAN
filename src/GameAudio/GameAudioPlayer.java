@@ -4,6 +4,10 @@ import javax.sound.sampled.*;
 import java.io.*;
 import java.net.URL;
 
+/**
+ * Moteur Sonore
+ * cette classe permet d'ajouter des éffets sonore a notre jeu
+ */
 public class GameAudioPlayer implements AudioPlayer {
     //    private Ucigame ucigame;
     private Clip audioClip;

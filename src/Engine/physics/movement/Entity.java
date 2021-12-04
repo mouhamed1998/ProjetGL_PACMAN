@@ -6,17 +6,32 @@ import GamePlay.GameGraphic;
 import java.awt.*;
 import java.net.URL;
 
+/**
+ * Moteur physique
+ * coté Mouvement
+ * cette classe represente les caractéristique d'une entitée dans le jeu
+ */
 public abstract class Entity {
+    /** l'attribut position represente la position d'une entité (à partir du centre de l'objet) */
     private Point position;
+
+    /** l'attribut pixelposition (dernier pixel) represente la position d'une entité (à partir du centre de l'objet + la taille/2)  */
     private Point PixelPosition;
+
+    /** l'attribut image represente l'image de l'entitée*/
     private Image image;
+
+    /** l'attribut path represente le chemin vers l'image de l'entitée */
     private String path;
     //private String systemPath = System.getProperty("user.dir");
+
+    /** l'attribut mapNew represente notre labyrinthe */
     private MapNew mapNew;
     private static int size = 30;
-    private Point pixelPosition;
 
 
+
+    /** des getter et des setter pour les attributs */
     public void SetImage(Image image){
         this.image =image;
     }

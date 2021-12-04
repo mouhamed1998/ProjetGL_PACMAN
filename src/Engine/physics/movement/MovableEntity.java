@@ -5,6 +5,10 @@ import Engine.physics.Collision.CollisionMap;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * la classe MovableEntity represente les entitées ayant la capacité de bouger dans notre jeu tels que le pacmane et les fantomes
+ * elle etend la classe abstraite Entity et implemente l'interface Movement
+ */
 public class MovableEntity extends Entity implements Movement{
     private Image normalImage, upImage, downImage, leftImage,rightImage,image;
     private Point pixelPosition;
@@ -83,6 +87,10 @@ public class MovableEntity extends Entity implements Movement{
         this.map = map;
     }
 
+    /**
+     * la méthode move permet de déplacer l'entitée dans le labyrinthe en ajoutant la valeur
+     * de l'attribut speed a la position actuelle de l'entitée
+     */
     public void move() {
 
         switch (this.getDirection()) {
@@ -113,6 +121,8 @@ public class MovableEntity extends Entity implements Movement{
         return null;
     }
 
+    /** les méthodes goUp, goDown, goLeft, goRight : representent une mise à jour du deplacement
+     * de l'entitée */
     @Override
     public void goUp() {
         this.direction = MovementType.UP;

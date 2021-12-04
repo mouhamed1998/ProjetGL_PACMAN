@@ -9,7 +9,11 @@ import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
+/**
+ * cette class permet de construire notre interface graphique du jeu vidéo Pacman
+ */
 public class MazeWindow extends JFrame {
+
     public MazeWindow() throws FileNotFoundException, MalformedURLException, URISyntaxException {
         setTitle("GL - Projet -  Pacman");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

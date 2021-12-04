@@ -3,7 +3,11 @@ package Engine.physics.Collision;
 import Engine.physics.movement.Entity;
 
 import java.awt.*;
-
+/**
+ * Moteur Physique
+ * la partie collision
+ * cette classe gère les collisions entre les entités rectangle
+ */
 public class CollisionRectangle implements CollisionEngine {
     @Override
     public boolean isOutOfMazeWindow(Entity e1, int mazeHeight, int mazeWidth) {

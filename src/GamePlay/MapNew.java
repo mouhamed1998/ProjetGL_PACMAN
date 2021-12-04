@@ -7,14 +7,36 @@ import java.awt.Point;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * la class MapNew represente les composants de notre
+ * jeu, une sorte de carte qui défini toutes les entités du jeu
+ *
+ */
 public class MapNew {
+
+    /** l'attribut mapGraphic represente une matrice d'entier où chaque entier fait référence a une entitée du jeu */
     private int[][] mapGraphic;
+
+    /** l'attribut coinPositions represente une liste qui stocke la position des coins */
     private ArrayList<Point> coinPositions;
     private ArrayList<Point> puCoinPositions;
+
+    /** l'attribut ghostsData represente une liste qui stocke les données des fantomes  */
     private ArrayList<Ghost> ghostsData;
+
+    /** l'attribut wallpositions est une liste qui stocke les positions des murs */
     private ArrayList<Point> wallPositions;
+
+    /** l'attribut pacmanPosition */
     private Point pacmanPosition;
+
+    /** l'attribut ghostBasePosition represente la position initiale d'un fantome */
     private Point ghostBasePosition;
+
+    /**
+     * une méthode qui retourne la position d'un coin
+     * @return coinposition
+     */
     public ArrayList<Point> getCoinPositions() {
         return coinPositions;
     }
@@ -22,6 +44,10 @@ public class MapNew {
         this.coinPositions = coinPositions;
     }
 
+    /**
+     * une méthode qui retourne une liste qui represente la position d'un coin
+     * @return coinposition
+     */
     public ArrayList<Point> getPuCoinPositions() {
         return puCoinPositions;
     }
@@ -71,6 +97,11 @@ public class MapNew {
         this.mapGraphic = mapGraphic;
     }
 
+    /**
+     * la méthode getMapFromResource permet de parser le fichier qui represente notre labyrinthe du jeu
+     * et en identifiant chaque entité avec un entier dans la mapGraphic
+     * @param relPath qui défini le chemin du fichier
+     */
     public void getMapFromResource(String relPath){
         BufferedReader reader;
         mapGraphic = new int[24][27];
@@ -154,6 +185,10 @@ public class MapNew {
         System.out.println("read complete");
     }
 
+    /**
+     * une méthode qui affiche le labyrinthe et prend en parametre une matrice d'entiers
+     * @param map qui represente une matrice
+     */
     void showMapString(int[][] map) {
         int mx = map.length;
         int my = map[0].length;

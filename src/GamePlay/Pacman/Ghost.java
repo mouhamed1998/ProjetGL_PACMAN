@@ -12,21 +12,36 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * cette class represente les fantomes, elle étend la class MovableEntity qui fait réference
+ * aux entités en mouvement
+ */
 public class Ghost extends MovableEntity {
-    //public RandomMovement AI;
-    public AiInterface AI;
-    //import AI.RandomMovement;
-    private int number;
-    public MovementType nextDirection;
-    private double speed = 1;
-    private GameGraphic gameGraphic;
-    //1 ---> Rouge;
 
-    public int getNumber() {
-        return number;
-    }
+    /** l'attribut AI permet de donner une intelligence artificielle aux déplacements des fantomes */
+    public AiInterface AI;
+
+    /** l'attribut number represente le numéro du fantomes dans le labyrinthe */
+    private int number;
+
+    /** l'attribut nextDirection represente la prochaine direction que le fantome doit suivre  */
+    public MovementType nextDirection;
+
+    /** l'attribut speed fait référence a la vitesse des fantomes  */
+    private double speed = 1;
+
+    /** l'attribut gameGraphic represente l'interface graphique du jeu */
+    private GameGraphic gameGraphic;
+
+    /** l'attribut image represente une image de l'entité fantome */
     private Image image;
 
+
+    /**
+     * un constructeur de la class Ghost qui prend en parametre
+     * @param position qui represente la position du fantome
+     * @param number qui represente le numéro du fantome
+     */
     public Ghost(Point position, int number) {
         //this.map = new Map();
 
@@ -58,60 +73,6 @@ public class Ghost extends MovableEntity {
 
     }
 
-    @Override
-    public String getUrls() {
-        switch (number){
-            case 1:{
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png")).getImage();
-                this.setImage(image);
-                return"src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png";
-
-            }
-            case 2:{
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png")).getImage();
-                this.setImage(image);
-                return "src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png";
-            }
-
-            case 3:{
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png")).getImage();
-                this.setImage(image);
-                return "src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png";
-
-            }
-
-        }
-        return null;
-    }
-
-    public AiInterface getAI() {
-        return AI;
-    }
-
-    public Image getImage() {
-        switch (number){
-            case 1:{
-                this.image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png")).getImage();
-                this.setImage(image);
-                return  image;
-
-            }
-            case 2:{
-                this.image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png")).getImage();
-                this.setImage(image);
-                return image;
-            }
-
-            case 3:{
-                Image image =  new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png")).getImage();
-                this.setImage(image);
-                return image;
-            }
-
-
-        }
-        return null;
-    }
     public Ghost(Ghost ghost, GameGraphic gameGraphic){
         this.nextDirection = MovementType.LEFT;
         this.direction = MovementType.STOP;
@@ -149,6 +110,71 @@ public class Ghost extends MovableEntity {
         this.setGameBoard(this.gameGraphic);
 
     }
+
+
+    /**
+     * la méthode getUrls() permet de affecter l'image correspondant pour chaque fantome
+     * @return l'image d'un fantome
+     */
+    @Override
+    public String getUrls() {
+        switch (number){
+            case 1:{
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png")).getImage();
+                this.setImage(image);
+                return"src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png";
+
+            }
+            case 2:{
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png")).getImage();
+                this.setImage(image);
+                return "src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png";
+            }
+
+            case 3:{
+                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png")).getImage();
+                this.setImage(image);
+                return "src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png";
+
+            }
+
+        }
+        return null;
+    }
+
+    public AiInterface getAI() {
+        return AI;
+    }
+
+    /**
+     * la méthode getImage() permet de récupérer l'image du fantome
+     * @return image d'un fantome
+     */
+    public Image getImage() {
+        switch (number){
+            case 1:{
+                this.image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png")).getImage();
+                this.setImage(image);
+                return  image;
+
+            }
+            case 2:{
+                this.image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png")).getImage();
+                this.setImage(image);
+                return image;
+            }
+
+            case 3:{
+                Image image =  new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png")).getImage();
+                this.setImage(image);
+                return image;
+            }
+
+
+        }
+        return null;
+    }
+
     public void nextMoveCalculateByAI(Kernel kernel){
         MovementType movementType = this.AI.getMovement(this, kernel);
         //System.out.println("movement: " + movementType);
@@ -213,32 +239,55 @@ public class Ghost extends MovableEntity {
 
     }
 
+    /**
+     * la méthode getNumber() permet de récupérer le nombre de fantomes dans le labyrinthe
+     * @return nombre de fantomes
+     */
+    public int getNumber() {
+        return number;
+    }
+
     @Override
 
     public String name() {
         return null;
     }
 
+    /**
+     * méthode qui permet de mettre à jour la direction de l'entité
+     */
     @Override
     public void goUp() {
         this.nextDirection = MovementType.UP;
     }
 
+    /**
+     * méthode qui permet de mettre à jour la direction de l'entité
+     */
     @Override
     public void goDown() {
         this.nextDirection = MovementType.DOWN;
     }
 
+    /**
+     * méthode qui permet de mettre à jour la direction de l'entité
+     */
     @Override
     public void goLeft() {
         this.nextDirection = MovementType.LEFT;
     }
 
+    /**
+     * méthode qui permet de mettre à jour la direction de l'entité
+     */
     @Override
     public void goRight() {
         this.nextDirection = MovementType.RIGHT;
     }
 
+    /**
+     * méthode qui permet de mettre à jour la direction de l'entité
+     */
     @Override
     public void stop() {
         this.nextDirection = MovementType.STOP;

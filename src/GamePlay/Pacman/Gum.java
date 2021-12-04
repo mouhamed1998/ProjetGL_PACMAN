@@ -6,9 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * cette class represente les pac-gommes, elle étend la class Entity qui fait réference
+ * aux entités du jeu
+ */
 public class Gum extends Entity {
     public  boolean canEat = true;
     private Image image;
+
+    /**
+     * constructeur de la class Gum qui permet de créer une instance gum, il prend en parametre une position
+     * @param position la position du pac-gum
+     */
     public Gum(Point position) {
         this.image = new ImageIcon("src/API/ressource/pacman_img/big_gum.png").getImage();
         this.setPosition(position);
@@ -21,9 +30,7 @@ public class Gum extends Entity {
     }
 
     @Override
-    public void setSpeed(int i) {
-
-    }
+    public void setSpeed(int i) {}
 
     @Override
     public int getNumber() {

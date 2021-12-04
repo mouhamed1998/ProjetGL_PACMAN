@@ -8,8 +8,18 @@ import GamePlay.Pacman.Wall;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ * RandomMovement est une class qui permet de faire bouger les fantomes d'une maniere aléatoire
+ */
 public class RandomMovement implements AiInterface{
     Ghost ghost;
+
+    /**
+     * cette methode permet de gèrer les déplacement aléatoire des fantomes
+     * @param ghost prend en parametre un fantome
+     * @param coreKernel le noyau
+     * @return le déplacement choisi de maniere aléatoire
+     */
     @Override
     public MovementType getMovement(Ghost ghost, Kernel coreKernel) {
         this.ghost = ghost;
