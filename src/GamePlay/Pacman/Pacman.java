@@ -13,7 +13,6 @@ public class Pacman extends MovableEntity {
 
     public MovementType nextDirection;
     public double speed =1;
-
     public int life =3;
     private JPanel jPanel;
     String url;
