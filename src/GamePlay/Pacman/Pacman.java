@@ -23,12 +23,12 @@ public class Pacman extends MovableEntity {
         this.direction = MovementType.RIGHT;
         this.setPosition(position);
         this.setPixelPosition(new Point(position.x*getSize()+10 ,position.y*getSize()+10));
-        this.upImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/up/up.gif").getImage();
-        this.normalImage = new ImageIcon("src/API/ressource/pacman_img/right.gif").getImage();
-        this.image = new ImageIcon("src/API/ressource/pacman_img/right.gif").getImage();
-        this.downImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/down/down.gif").getImage();
-        this.leftImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/left/left.gif").getImage();
-        this.rightImage = new ImageIcon("src/API/ressource/pacman_img/Image/Pacman/right/right.gif").getImage();
+        this.upImage = new ImageIcon(this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Pacman/up/up.gif")).getImage();
+        this.normalImage = new ImageIcon(this.getClass().getClassLoader().getResource("API/ressource/pacman_img/right.gif")).getImage();
+        this.image = new ImageIcon(this.getClass().getClassLoader().getResource("API/ressource/pacman_img/right.gif")).getImage();
+        this.downImage = new ImageIcon(this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Pacman/down/down.gif")).getImage();
+        this.leftImage = new ImageIcon(this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Pacman/left/left.gif")).getImage();
+        this.rightImage = new ImageIcon(this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Pacman/right/right.gif")).getImage();
         this.setImage(normalImage);
     }
     public int getLife() {

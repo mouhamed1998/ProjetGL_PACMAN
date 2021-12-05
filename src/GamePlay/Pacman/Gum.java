@@ -19,7 +19,7 @@ public class Gum extends Entity {
      * @param position la position du pac-gum
      */
     public Gum(Point position) {
-        this.image = new ImageIcon("src/API/ressource/pacman_img/big_gum.png").getImage();
+        this.image = new ImageIcon(this.getClass().getClassLoader().getResource("API/ressource/pacman_img/big_gum.png")).getImage();
         this.setPosition(position);
         this.setPixelPosition(new Point(position.x*getSize()+10 ,position.y*getSize()+10));
     }

@@ -25,7 +25,7 @@ public class MazeWindow extends JFrame {
         scoreboard.setForeground(new Color(255, 243, 36));
         setVisible(true);
         MapNew map = new MapNew();
-        map.getMapFromResource("/API/mapS.txt");
+        map.getMapFromResource("API/mapS.txt");
         //map.adjustMap();
         map.adjustNewMap();
         GameGraphic pb = new GameGraphic(scoreboard, map, this);

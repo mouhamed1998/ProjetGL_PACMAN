@@ -12,6 +12,7 @@ import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -145,14 +146,14 @@ public class GameGraphic extends JPanel implements KeyListener {
     }
 
     void initImage() {
-        md.getMapFromResource("src/API/mapS.txt");
+       // md.getMapFromResource("src/API/mapS.txt");
         md.adjustNewMap();
         map =md.getMapGraphic();
         setBackground(Color.black);
         mapSegments[0] = null;
         for(int ms=1;ms<27;ms++){
             try {
-                String path = "src/API/ressource/pacman_img/Image/map_segments/"+ms+".png";
+                URL path = this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/map_segments/"+ms+".png");
                 mapSegments[ms] = new ImageIcon(path).getImage();
             }catch(Exception e){
                 System.out.println("ms: " + ms);
@@ -162,15 +163,18 @@ public class GameGraphic extends JPanel implements KeyListener {
         pfoodImage = new Image[5];
         for(int ms=0 ;ms<5;ms++){
             try {
-                String path =("src/API/ressource/pacman_img/Image/Coin/fruit-"+ms+".png");
+                URL path = this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Coin/fruit-"+ms+".png");
                 pfoodImage[ms] = new ImageIcon(path).getImage();
             }catch(Exception e){
                 e.printStackTrace();
             }
         }
         try{
-            String path = ("src/API/ressource/pacman_img/Image/Coin/coin-normal.png");
+            URL path = this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Coin/coin-normal.png");
             foodImage = new ImageIcon(path).getImage();
+            //goImage = ImageIO.read(this.getClass().getResource("resources/images/gameover.png"));
+            //vicImage = ImageIO.read(this.getClass().getResource("resources/images/victory.png"));
+            //pfoodImage = ImageIO.read(this.getClass().getResource("/images/pfood.png"));
         }catch(Exception e){}
     }
     CollisionMap collisionMap =new CollisionMap();

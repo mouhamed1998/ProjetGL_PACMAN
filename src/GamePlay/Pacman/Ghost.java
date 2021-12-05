@@ -50,22 +50,22 @@ public class Ghost extends MovableEntity {
         this.setPixelPosition(new Point(position.x*this.getSize()+10 ,position.y*this.getSize()+10));
         switch (number){
             case 1:{
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png")).getImage();
+                Image image = new ImageIcon((this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png"))).getImage();
                 this.setImage(image);
                 break;
             }
             case 2: {
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png")).getImage();
+                Image image = new ImageIcon((this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png"))).getImage();
                 this.setImage(image);
                 break;
             }
             case 3: {
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Clyde/Clyde-0.png")).getImage();
+                Image image = new ImageIcon((this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Ghost/Clyde/Clyde-0.png"))).getImage();
                 this.setImage(image);
                 break;
             }
             default: {
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png")).getImage();
+                Image image = new ImageIcon((this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png"))).getImage();
                 this.setImage(image);
                 break;
             }
@@ -81,22 +81,22 @@ public class Ghost extends MovableEntity {
         this.setPixelPosition(new Point(ghost.getPosition().x*this.getSize()+10 ,ghost.getPosition().y*this.getSize()+10));
         switch (number){
             case 1:{
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png")).getImage();
+                Image image = new ImageIcon((this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png"))).getImage();
                 this.setImage(image);
                 break;
             }
             case 2: {
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png")).getImage();
+                Image image = new ImageIcon((this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png"))).getImage();
                 this.setImage(image);
                 break;
             }
             case 3: {
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Clyde/Clyde-0.png")).getImage();
+                Image image = new ImageIcon((this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Ghost/Clyde/Clyde-0.png"))).getImage();
                 this.setImage(image);
                 break;
             }
             default: {
-                Image image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png")).getImage();
+                Image image = new ImageIcon((this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png"))).getImage();
                 this.setImage(image);
                 break;
             }
@@ -153,19 +153,19 @@ public class Ghost extends MovableEntity {
     public Image getImage() {
         switch (number){
             case 1:{
-                this.image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png")).getImage();
+                this.image = new ImageIcon((this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Ghost/Blinky/Blinky-0.png"))).getImage();
                 this.setImage(image);
                 return  image;
 
             }
             case 2:{
-                this.image = new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png")).getImage();
+                this.image = new ImageIcon((this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Ghost/Pinky/Pinky-0.png"))).getImage();
                 this.setImage(image);
                 return image;
             }
 
             case 3:{
-                Image image =  new ImageIcon(("src/API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png")).getImage();
+                Image image =  new ImageIcon((this.getClass().getClassLoader().getResource("API/ressource/pacman_img/Image/Ghost/Inky/Inky-0.png"))).getImage();
                 this.setImage(image);
                 return image;
             }

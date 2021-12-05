@@ -5,6 +5,7 @@ import GamePlay.Pacman.Ghost;
 
 import java.awt.Point;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -110,18 +111,11 @@ public class MapNew {
         ghostsData = new ArrayList<>();
         wallPositions = new ArrayList<>();
         try {
-            BufferedReader lecteurAvecBuffer = null;
-            String ligne;
-
-            try
-            {
-                lecteurAvecBuffer = new BufferedReader(new FileReader(relPath));
-            }
-            catch(FileNotFoundException exc)
-            {
-                System.out.println("Erreur d'ouverture");
-            }
-            String line = lecteurAvecBuffer.readLine();;
+            InputStream input = this.getClass().getClassLoader().getResourceAsStream(relPath);
+            InputStreamReader streamReader =
+                    new InputStreamReader(input, StandardCharsets.UTF_8);
+            reader = new BufferedReader(streamReader);
+            String line = reader.readLine();
             int i = 0;
             int j = 0;
             while(line != null){
@@ -177,7 +171,7 @@ public class MapNew {
                         j = 0;
                     }
                 }
-                line = lecteurAvecBuffer.readLine();
+                line = reader.readLine();
             }
         }catch(Exception e){
             e.printStackTrace();
